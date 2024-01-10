@@ -1,0 +1,38 @@
+.page {
+  background: #f0f0f0;
+  padding-top: 40px;
+  padding-bottom: 30px;
+}
+
+.feed {
+  width: 100%;
+  padding: 20px;
+  position: relative;
+
+  &:not(:first-child) {
+    margin-top: 13px;
+  }
+}
+
+.noPosts {
+  padding: 20px;
+  background-color: #fff;
+
+  &__title {
+    font-size: 20px;
+  }
+
+  &__generalButton {
+    margin-right: 15px;
+    padding: 3px 15px;
+    border-radius: 20px;
+  }
+}
+
+.banner {
+  img {
+    width: 100%;
+  }
+
+  margin-bottom: 20px;
+}
