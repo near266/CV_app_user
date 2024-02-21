@@ -8,9 +8,15 @@ import {
 import { Common } from '@/shared';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
+import AfterTest from '../../../../components/common/ConfirmModal/modal';
+import { useState } from 'react';
 
 const TestResult = (props) => {
   const { chartData, suggestions, assessment } = props;
+  const [modalClose, setModalClose] = useState(true);
+  const closeModal = () => {
+    return setModalClose(false);
+  };
   return (
     <div>
       <HtmlHeader title="Kết quả đánh giá" />
@@ -19,6 +25,7 @@ const TestResult = (props) => {
         suggestions={suggestions}
         assessment={assessment}
       />
+      {modalClose && <AfterTest onClose={closeModal}></AfterTest>}
     </div>
   );
 };
@@ -183,7 +190,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       status && status === SuggestionStatus.RESOLVE
         ? genSuggestion(data.result, data.test_type)
         : data.test_type === AssessmentType.YOUR_SELF
-          ? // fix tam nhe =)
+        ? // fix tam nhe =)
           {
             textContent: data.result.data.map((item) => {
               return {
@@ -193,12 +200,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
               };
             }),
           }
-          : data.test_type === AssessmentType.COMPETENCY
-            ? {
-              testLevel: data?.result?.test_level,
-              testLevelDesc: data?.result?.level_description,
-            }
-            : {};
+        : data.test_type === AssessmentType.COMPETENCY
+        ? {
+            testLevel: data?.result?.test_level,
+            testLevelDesc: data?.result?.level_description,
+          }
+        : {};
     const suggestions = {
       status: status ?? '',
       data: suggestionData,
