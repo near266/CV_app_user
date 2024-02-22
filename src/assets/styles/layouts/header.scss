@@ -14,7 +14,7 @@ $active-text-color: #403ecc;
   align-items: center;
   justify-content: space-between;
   font-family: 'Lexend Deca', sans-serif;
-  z-index: 999;
+  z-index: 10;
 
   .menu-styled {
     display: flex;
@@ -50,6 +50,7 @@ $active-text-color: #403ecc;
     margin: 0;
     max-width: 978px;
   }
+
   /* menu bar */
   .first-header {
     height: 100%;
@@ -146,6 +147,7 @@ $active-text-color: #403ecc;
       }
     }
   }
+
   /* functional action */
   .second-header {
     flex: 0 0 auto;
@@ -225,6 +227,7 @@ $active-text-color: #403ecc;
       }
     }
   }
+
   /* menu toggle */
   .menu-toggler {
     align-items: center;
@@ -245,6 +248,7 @@ $active-text-color: #403ecc;
       }
     }
   }
+
   /* styling for menu expand */
   &.expanded {
     // .first-header {

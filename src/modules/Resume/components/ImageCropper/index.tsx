@@ -180,6 +180,7 @@ const ImageCropper = (props) => {
                     <div className={styles.modalBody__title}>Ảnh hiển thị</div>
                     <div>
                       <canvas
+                        className="z-2!"
                         ref={previewCanvasRef}
                         style={{ width: `${props.imagePreviewWidth}px` }}
                         // style={{

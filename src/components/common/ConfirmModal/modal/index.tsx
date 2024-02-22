@@ -1,7 +1,14 @@
 import { NextPage } from 'next';
 import styles from './indexModal.module.scss';
+import UploadCVModal from '../../UploadCVModal';
+import { useState } from 'react';
 
-const AfterTest = ({ onClose }) => {
+const AfterTest = ({ onClose, onOpenUploadCVModal }) => {
+  const handleOpenModal = () => {
+    onClose();
+    onOpenUploadCVModal();
+  };
+
   return (
     <>
       <div className={styles.modal}>
@@ -37,13 +44,16 @@ const AfterTest = ({ onClose }) => {
 
           <div className="flex justify-center  ">
             <button
-              onClick={onClose}
+              onClick={handleOpenModal}
               className="text-[#403ECC] w-[80px] font-semibold border-[2px] border-[#403ECC] p-2 mr-3 rounded-[8px]"
             >
               Tạo
             </button>
 
-            <button className="rounded-[8px] w-[80px] text-white font-semibold p-2 bg-[#403ECC]">
+            <button
+              onClick={handleOpenModal}
+              className="rounded-[8px] w-[80px] text-white font-semibold p-2 bg-[#403ECC]"
+            >
               Tải lên
             </button>
           </div>

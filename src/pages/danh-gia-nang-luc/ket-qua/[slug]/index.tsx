@@ -10,13 +10,17 @@ import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import AfterTest from '../../../../components/common/ConfirmModal/modal';
 import { useState } from 'react';
+import UploadCVModal from '@/components/common/UploadCVModal';
 
 const TestResult = (props) => {
   const { chartData, suggestions, assessment } = props;
-  const [modalClose, setModalClose] = useState(true);
-  const closeModal = () => {
-    return setModalClose(false);
+  const [confirmModal, setConfirmModal] = useState(true);
+  const closeConfirmModal = () => {
+    return setConfirmModal(false);
   };
+  const [uploadCVModal, setUploadCVModal] = useState(false);
+  const closeUploadCVModal = () => setUploadCVModal(false);
+  const openUploadCVModal = () => setUploadCVModal(true);
   return (
     <div>
       <HtmlHeader title="Kết quả đánh giá" />
@@ -25,7 +29,13 @@ const TestResult = (props) => {
         suggestions={suggestions}
         assessment={assessment}
       />
-      {modalClose && <AfterTest onClose={closeModal}></AfterTest>}
+      {confirmModal && (
+        <AfterTest
+          onOpenUploadCVModal={openUploadCVModal}
+          onClose={closeConfirmModal}
+        ></AfterTest>
+      )}
+      {uploadCVModal && <UploadCVModal onClose={closeUploadCVModal}></UploadCVModal>}
     </div>
   );
 };

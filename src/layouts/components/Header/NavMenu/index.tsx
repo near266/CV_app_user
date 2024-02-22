@@ -189,7 +189,7 @@ const NavMenu = () => {
                 </LinkOrATag>
               ) : (
                 <a
-                  className="menu-styled tw-relative tw-relative"
+                  className="menu-styled tw-relative "
                   onClick={() => {
                     menu.actionClick();
                   }}

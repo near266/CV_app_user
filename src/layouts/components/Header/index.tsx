@@ -66,7 +66,7 @@ const Header = () => {
   return (
     <>
       <header id="__header" ref={headerRef}>
-        <div className="container !tw-max-w-[1607px] d-flex tw-items-center !tw-h-full">
+        <div className="container !tw-max-w-[1607px] !z-2 d-flex tw-items-center !tw-h-full">
           <div className="menu-toggler d-flex d-lg-none">
             <div className="toggler">
               <i
@@ -160,7 +160,7 @@ const Header = () => {
         </div>
       </header>
       <div className="container ">
-        <div className="tw-m-0 tw-absolute tw-top-[94px] tw-z-[99]">
+        <div className="tw-m-0 tw-absolute tw-top-[94px] tw-z-1">
           <BreadCumb />
         </div>
       </div>
