@@ -2,6 +2,7 @@ import { DatePicker, DatePickerProps, Input, Select, Space } from 'antd';
 import styles from './indexModal.module.scss';
 import TextArea from 'antd/lib/input/TextArea';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import FileUpload from '../fileUpload';
 
 const UploadCVModal = ({ onClose }) => {
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {
@@ -201,20 +202,21 @@ const UploadCVModal = ({ onClose }) => {
               <div className="flex tw-gap-3">
                 <div className="w-[50%]">
                   <p className="text-[#44444F] py-2">Bắt đầu</p>
-                  <Select
-                    bordered={false}
-                    className="border  rounded-[10px] h-[40.45px] flex tw-items-center"
+
+                  <DatePicker
                     placeholder="12/10/2017"
-                  ></Select>
+                    className="rounded-[10px] p-2 w-full"
+                    onChange={onChange}
+                  />
                 </div>
 
                 <div className="w-[50%]">
                   <p className="text-[#44444F] py-2">Kết thúc</p>
-                  <Select
-                    bordered={false}
-                    className="border  rounded-[10px] h-[40.45px] flex tw-items-center"
+                  <DatePicker
                     placeholder="12/10/2022"
-                  ></Select>
+                    className="rounded-[10px] p-2 w-full"
+                    onChange={onChange}
+                  />
                 </div>
               </div>
 
@@ -248,20 +250,20 @@ const UploadCVModal = ({ onClose }) => {
               <div className="flex tw-gap-3">
                 <div className="w-[50%]">
                   <p className="text-[#44444F] py-2">Bắt đầu</p>
-                  <Select
-                    bordered={false}
-                    className="border  rounded-[10px] h-[40.45px] flex tw-items-center"
+                  <DatePicker
                     placeholder="12/10/2017"
-                  ></Select>
+                    className="rounded-[10px] p-2 w-full"
+                    onChange={onChange}
+                  />
                 </div>
 
                 <div className="w-[50%]">
                   <p className="text-[#44444F] py-2">Kết thúc</p>
-                  <Select
-                    bordered={false}
-                    className="border  rounded-[10px] h-[40.45px] flex tw-items-center"
+                  <DatePicker
                     placeholder="12/10/2022"
-                  ></Select>
+                    className="rounded-[10px] p-2 w-full"
+                    onChange={onChange}
+                  />
                 </div>
               </div>
 
@@ -303,7 +305,18 @@ const UploadCVModal = ({ onClose }) => {
             <div>
               <p className="text-[#22216D] my-[25px] font-medium">Lời nhắn</p>
 
-              <TextArea placeholder="Nhập lời nhắn"></TextArea>
+              <TextArea
+                rows={4}
+                className="rounded-[10px]"
+                placeholder="Nhập lời nhắn"
+              ></TextArea>
+            </div>
+
+            <div className="my-2 ">
+              <p className="py-3 text-[#696974]">
+                (Định dạng file .doc, .docx, .pdf dung lượng &le; 5 MB)
+              </p>
+              <FileUpload></FileUpload>
             </div>
           </div>
 
