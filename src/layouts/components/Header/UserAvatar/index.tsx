@@ -42,7 +42,7 @@ const UserAvatar = () => {
               </Link>
             </li>
             <li>
-              <Link href="https://job.youth.com.vn/job/cv/list-cv">
+              <Link href="/cv-management">
                 <a className={styles.expandMenu__item}>
                   <i className="fas fa-book" />
                   Quản lý CV
