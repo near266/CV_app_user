@@ -1,17 +1,69 @@
-import { DatePicker, DatePickerProps, Input, Select, Space } from 'antd';
+import {
+  ConfigProvider,
+  DatePicker,
+  DatePickerProps,
+  Input,
+  Select,
+  Space,
+  message,
+} from 'antd';
 import styles from './indexModal.module.scss';
 import TextArea from 'antd/lib/input/TextArea';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import FileUpload from '../fileUpload';
+import locale from 'yup/lib/locale';
+import 'dayjs/locale/zh-cn';
+import { useDispatch, useSelector } from 'react-redux';
+import { IRootState, setAuthUser } from '@/store';
+import { useSnackbar } from '@/shared/snackbar';
+import { useFormik, Formik, Field, ErrorMessage } from 'formik';
+import { SettingForm } from '@/modules/User/pages/Setting/models';
+import { validationSchema } from './validationSchema';
+import { appLibrary, authService } from '@/shared';
+import { FormHelper, TextInput, Form } from '@/shared/forms';
+import { ValidationError } from 'yup';
+import { log } from 'console';
+import React, { useState } from 'react';
 
 const UploadCVModal = ({ onClose }) => {
+  const me = useSelector((state: IRootState) => state.auth.me);
+  const dispatch = useDispatch();
+  const snackbar = useSnackbar();
+
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {
     console.log(date, dateString);
   };
+
+  const settingForm = useFormik<SettingForm>({
+    initialValues: new SettingForm(me),
+    validationSchema,
+    onSubmit: handleSubmit,
+  });
+
+  async function handleSubmit(formValues: SettingForm) {
+    appLibrary.showloading();
+    const res = await authService
+      .updateMeInfo(formValues)
+      .catch((errors) => {
+        FormHelper.handleValidationErrors(settingForm, errors);
+        snackbar.showMessage('Có lỗi, vui lòng kiểm tra lại thông tin', 'error');
+      })
+      .finally(() => appLibrary.hideloading());
+
+    if (res?.code === 'SUCCESS') {
+      dispatch(setAuthUser(res.payload));
+      snackbar.showMessage('Cập nhật thông tin thành công', 'success');
+    }
+  }
+
   return (
     <>
       <div className={styles.modal}>
-        <div className="py-[20px] w-[85%] h-[85%] overflow-visible rounded-[16px] bg-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <Form
+          initForm={settingForm}
+          onSubmit={settingForm.handleSubmit}
+          className="py-[20px] w-[85%] h-[85%] overflow-visible rounded-[16px] bg-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        >
           <button
             onClick={onClose}
             className="absolute z-12 cursor-pointer transition-transform transform hover:scale-105 z-10 text-white bg-[#44444F] border-solid border-[6px] border-white top-0 right-0 p-4 -translate-y-[10px] translate-x-[20px] rounded-full"
@@ -64,6 +116,8 @@ const UploadCVModal = ({ onClose }) => {
                       Họ & Tên <span className="text-[#EB4C4C]">*</span>
                     </p>
                     <Input
+                      required
+                      name="name"
                       className="rounded-[10px] p-2"
                       placeholder="Nguyễn Văn A"
                     ></Input>
@@ -91,34 +145,20 @@ const UploadCVModal = ({ onClose }) => {
                 </div>
 
                 <div className="flex gap-3 tw-my-3">
-                  <div className="w-[40%]">
-                    <p className="text-[#44444F] py-2">
-                      Ngày tháng năm sinh <span className="text-[#EB4C4C]">*</span>
-                    </p>
-                    <Space>
+                  <div className="w-[25%]">
+                    <div className="w-full">
+                      <p className="text-[#44444F] py-2">Ngày tháng năm sinh</p>
                       <DatePicker
-                        placeholder="Ngày"
-                        className="rounded-[10px] p-2"
+                        locale={locale}
+                        placeholder="12/10/2002"
+                        className="rounded-[10px] p-2 w-full"
                         onChange={onChange}
+                        format="DD/MM/YYYY"
                       />
-
-                      <DatePicker
-                        placeholder="Tháng"
-                        picker="month"
-                        className="rounded-[10px] p-2 "
-                        onChange={onChange}
-                      />
-
-                      <DatePicker
-                        placeholder="Năm"
-                        picker="year"
-                        className="rounded-[10px] p-2"
-                        onChange={onChange}
-                      />
-                    </Space>
+                    </div>
                   </div>
 
-                  <div className="w-[20%]">
+                  <div className="w-[25%]">
                     <p className="text-[#44444F] p-2">
                       Giới tính <span className="text-[#EB4C4C]">*</span>
                     </p>
@@ -127,10 +167,14 @@ const UploadCVModal = ({ onClose }) => {
                       bordered={false}
                       className="border rounded-[10px] w-full h-[40.45px] flex tw-items-center"
                       placeholder="Nam"
-                    ></Select>
+                    >
+                      <option value="male">Nam</option>
+                      <option value="female">Nữ</option>
+                      <option value="khac">Khác</option>
+                    </Select>
                   </div>
 
-                  <div className="w-[40%]">
+                  <div className="w-[50%]">
                     <p className="text-[#44444F] p-2">
                       Lĩnh vực <span className="text-[#EB4C4C]">*</span>
                     </p>
@@ -207,6 +251,7 @@ const UploadCVModal = ({ onClose }) => {
                     placeholder="12/10/2017"
                     className="rounded-[10px] p-2 w-full"
                     onChange={onChange}
+                    format="DD/MM/YYYY"
                   />
                 </div>
 
@@ -216,6 +261,7 @@ const UploadCVModal = ({ onClose }) => {
                     placeholder="12/10/2022"
                     className="rounded-[10px] p-2 w-full"
                     onChange={onChange}
+                    format="DD/MM/YYYY"
                   />
                 </div>
               </div>
@@ -263,6 +309,7 @@ const UploadCVModal = ({ onClose }) => {
                     placeholder="12/10/2022"
                     className="rounded-[10px] p-2 w-full"
                     onChange={onChange}
+                    format="DD/MM/YYYY"
                   />
                 </div>
               </div>
@@ -325,11 +372,14 @@ const UploadCVModal = ({ onClose }) => {
               Hủy bỏ
             </button>
 
-            <button className="rounded-[8px] w-[110px] text-white font-semibold p-2 bg-[#403ECC]">
+            <button
+              type="submit"
+              className="rounded-[8px] w-[110px] text-white font-semibold p-2 bg-[#403ECC]"
+            >
               Tải lên
             </button>
           </div>
-        </div>
+        </Form>
       </div>
     </>
   );
