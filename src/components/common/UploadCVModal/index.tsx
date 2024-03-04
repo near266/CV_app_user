@@ -39,10 +39,18 @@ const UploadCVModal = ({ onClose }) => {
   const handleAddEducation = () => {
     setEducationList([...educationList, {}]); // Thêm một phần học vấn mới vào danh sách
   };
+  const handleRemoveEducation = (indexToRemove) => {
+    setEducationList(educationList.filter((_, index) => index !== indexToRemove));
+  };
+
   const [experienceList, setExperienceList] = useState([{}]);
   const handleAddExperience = () => {
     setExperienceList([...experienceList, {}]); // Thêm một phần Kinh nghiệm vào danh sách
   };
+  const handleRemoveExperience = (indexToRemove) => {
+    setExperienceList(experienceList.filter((_, index) => index !== indexToRemove));
+  };
+
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {
     console.log(date, dateString);
   };
@@ -82,7 +90,7 @@ const UploadCVModal = ({ onClose }) => {
           </svg>
         </button>
 
-        <p className="text-[#0F0F14] font-medium p-[20px]">
+        <p className="text-[#0F0F14] text-[20px] font-bold p-[20px]">
           Tải hồ sơ của bạn lên YOUTH+
         </p>
 
@@ -304,47 +312,85 @@ const UploadCVModal = ({ onClose }) => {
           <div>
             {educationList.map((education, index) => (
               <div key={index}>
-                <p className="text-[#22216D] text-[18px] my-[25px] font-bold">
-                  Học vấn {educationList.length > 1 ? index + 1 : ''}
-                </p>
-                <div>
+                <div className="flex tw-justify-between">
+                  <p className="text-[#22216D] text-[18px] my-[25px] font-bold">
+                    Học vấn {educationList.length > 1 ? index + 1 : ''}
+                  </p>
+                  {educationList.length > 1 ? (
+                    <button onClick={() => handleRemoveEducation(index)}>
+                      <i className="fa-regular fa-trash-can text-[20px] tw-text-error"></i>
+                    </button>
+                  ) : (
+                    ''
+                  )}
+                </div>
+                <div className="w-full">
                   <p className="text-[#44444F] py-2">
                     Trường học <span className="text-[#EB4C4C]">*</span>
                   </p>
-                  <Input
-                    className="rounded-[10px] p-2"
-                    placeholder="Nhập tên trường"
-                  ></Input>
+                  <FormItem
+                    name={LICENSE_DATA_FIELD.license_school}
+                    className="w-full"
+                    rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
+                  >
+                    <Input
+                      size="large"
+                      className="rounded-[10px] p-2"
+                      placeholder="Nhập tên trường"
+                      allowClear
+                    ></Input>
+                  </FormItem>
                 </div>
-                <div>
+                <div className="w-full">
                   <p className="text-[#44444F] py-2">
-                    Chuyên ngành <span className="text-[#EB4C4C]">*</span>
+                    Chuyên ngành <span className="text-[#EB4C4C]">*</span>
                   </p>
-                  <Input
-                    className="rounded-[10px] p-2"
-                    placeholder="Nhập chuyên ngành học"
-                  ></Input>
+                  <FormItem
+                    name={LICENSE_DATA_FIELD.license_specialized}
+                    className="w-full"
+                    rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
+                  >
+                    <Input
+                      size="large"
+                      className="rounded-[10px] p-2"
+                      placeholder="Nhập chuyên ngành học"
+                      allowClear
+                    ></Input>
+                  </FormItem>
                 </div>
                 <div className="flex tw-gap-3">
-                  <div className="w-[50%]">
+                  <div className=" tw-w-[50%]">
                     <p className="text-[#44444F] py-2">Bắt đầu</p>
-
-                    <DatePicker
-                      placeholder="12/10/2017"
-                      className="rounded-[10px] p-2 w-full"
-                      onChange={onChange}
-                      format="DD/MM/YYYY"
-                    />
+                    <FormItem
+                      name={LICENSE_DATA_FIELD.start_day}
+                      className="w-full"
+                      rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
+                    >
+                      <DatePicker
+                        locale={locale}
+                        placeholder="14/08/2022"
+                        className="rounded-[10px] p-2 w-full"
+                        onChange={onChange}
+                        format="DD/MM/YYYY"
+                      />
+                    </FormItem>
                   </div>
 
-                  <div className="w-[50%]">
+                  <div className=" tw-w-[50%]">
                     <p className="text-[#44444F] py-2">Kết thúc</p>
-                    <DatePicker
-                      placeholder="12/10/2022"
-                      className="rounded-[10px] p-2 w-full"
-                      onChange={onChange}
-                      format="DD/MM/YYYY"
-                    />
+                    <FormItem
+                      name={LICENSE_DATA_FIELD.end_day}
+                      className="w-full"
+                      rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
+                    >
+                      <DatePicker
+                        locale={locale}
+                        placeholder="04/03/2024"
+                        className="rounded-[10px] p-2 w-full"
+                        onChange={onChange}
+                        format="DD/MM/YYYY"
+                      />
+                    </FormItem>
                   </div>
                 </div>
               </div>
@@ -365,9 +411,18 @@ const UploadCVModal = ({ onClose }) => {
           <div>
             {experienceList.map((experience, index) => (
               <div key={index}>
-                <p className="text-[#22216D] text-[18px] my-[25px] font-bold">
-                  Kinh nghiệm làm việc {experienceList.length > 1 ? index + 1 : ''}
-                </p>
+                <div className="flex tw-justify-between">
+                  <p className="text-[#22216D] text-[18px] my-[25px] font-bold">
+                    Kinh nghiệm làm việc {experienceList.length > 1 ? index + 1 : ''}
+                  </p>
+                  {experienceList.length > 1 ? (
+                    <button onClick={() => handleRemoveExperience(index)}>
+                      <i className="fa-regular fa-trash-can text-[20px] tw-text-error"></i>
+                    </button>
+                  ) : (
+                    ''
+                  )}
+                </div>
                 <div>
                   <p className="text-[#44444F] py-2">Tên công ty</p>
                   <Input

@@ -10,6 +10,9 @@ module.exports = {
       fontFamily: {
         LexendDeca: ['Lexend Deca', 'sans-serif'],
       },
+      colors: {
+        error: '#ec4c4c',
+      },
     },
   },
   plugins: [],
