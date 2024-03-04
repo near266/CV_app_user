@@ -35,6 +35,14 @@ const UploadCVModal = ({ onClose }) => {
     form
   );
   const [listImgEdit, setListImgEdit] = useState<string[]>([]);
+  const [educationList, setEducationList] = useState([{}]);
+  const handleAddEducation = () => {
+    setEducationList([...educationList, {}]); // Thêm một phần học vấn mới vào danh sách
+  };
+  const [experienceList, setExperienceList] = useState([{}]);
+  const handleAddExperience = () => {
+    setExperienceList([...experienceList, {}]); // Thêm một phần Kinh nghiệm vào danh sách
+  };
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {
     console.log(date, dateString);
   };
@@ -98,7 +106,9 @@ const UploadCVModal = ({ onClose }) => {
 
           {/* Thông tin các nhân */}
           <div>
-            <p className="text-[#22216D] my-[25px] font-medium">Thông tin cá nhân</p>
+            <p className="text-[#22216D] text-[18px] my-[25px] font-bold">
+              Thông tin cá nhân
+            </p>
 
             <div>
               <div className="grid tw-grid-cols-3 tw-gap-3">
@@ -206,7 +216,7 @@ const UploadCVModal = ({ onClose }) => {
                     Lĩnh vực <span className="text-[#EB4C4C]">*</span>
                   </p>
                   <FormItem
-                    name={LICENSE_DATA_FIELD.period}
+                    name={LICENSE_DATA_FIELD.field}
                     className="w-full"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -235,7 +245,7 @@ const UploadCVModal = ({ onClose }) => {
 
                 <div className="gap-3 grid tw-grid-cols-6 tw-grid-rows-1">
                   <FormItem
-                    name={LICENSE_DATA_FIELD.period}
+                    name={LICENSE_DATA_FIELD.province}
                     className="col-span-1"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -248,7 +258,7 @@ const UploadCVModal = ({ onClose }) => {
                   </FormItem>
 
                   <FormItem
-                    name={LICENSE_DATA_FIELD.period}
+                    name={LICENSE_DATA_FIELD.district}
                     className="col-span-1"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -261,7 +271,7 @@ const UploadCVModal = ({ onClose }) => {
                   </FormItem>
 
                   <FormItem
-                    name={LICENSE_DATA_FIELD.period}
+                    name={LICENSE_DATA_FIELD.wards}
                     className="col-span-1"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -274,7 +284,7 @@ const UploadCVModal = ({ onClose }) => {
                   </FormItem>
 
                   <FormItem
-                    name={LICENSE_DATA_FIELD.license_phone}
+                    name={LICENSE_DATA_FIELD.license_local}
                     className="col-span-3"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -292,51 +302,60 @@ const UploadCVModal = ({ onClose }) => {
 
           {/* Học vấn */}
           <div>
-            <p className="text-[#22216D] my-[25px] font-medium">Học vấn</p>
+            {educationList.map((education, index) => (
+              <div key={index}>
+                <p className="text-[#22216D] text-[18px] my-[25px] font-bold">
+                  Học vấn {educationList.length > 1 ? index + 1 : ''}
+                </p>
+                <div>
+                  <p className="text-[#44444F] py-2">
+                    Trường học <span className="text-[#EB4C4C]">*</span>
+                  </p>
+                  <Input
+                    className="rounded-[10px] p-2"
+                    placeholder="Nhập tên trường"
+                  ></Input>
+                </div>
+                <div>
+                  <p className="text-[#44444F] py-2">
+                    Chuyên ngành <span className="text-[#EB4C4C]">*</span>
+                  </p>
+                  <Input
+                    className="rounded-[10px] p-2"
+                    placeholder="Nhập chuyên ngành học"
+                  ></Input>
+                </div>
+                <div className="flex tw-gap-3">
+                  <div className="w-[50%]">
+                    <p className="text-[#44444F] py-2">Bắt đầu</p>
 
-            <div>
-              <p className="text-[#44444F] py-2">
-                Trường học <span className="text-[#EB4C4C]">*</span>
-              </p>
-              <Input className="rounded-[10px] p-2" placeholder="Nhập tên trường"></Input>
-            </div>
+                    <DatePicker
+                      placeholder="12/10/2017"
+                      className="rounded-[10px] p-2 w-full"
+                      onChange={onChange}
+                      format="DD/MM/YYYY"
+                    />
+                  </div>
 
-            <div>
-              <p className="text-[#44444F] py-2">
-                Chuyên ngành <span className="text-[#EB4C4C]">*</span>
-              </p>
-              <Input
-                className="rounded-[10px] p-2"
-                placeholder="Nhập chuyên ngành học"
-              ></Input>
-            </div>
-
-            <div className="flex tw-gap-3">
-              <div className="w-[50%]">
-                <p className="text-[#44444F] py-2">Bắt đầu</p>
-
-                <DatePicker
-                  placeholder="12/10/2017"
-                  className="rounded-[10px] p-2 w-full"
-                  onChange={onChange}
-                  format="DD/MM/YYYY"
-                />
+                  <div className="w-[50%]">
+                    <p className="text-[#44444F] py-2">Kết thúc</p>
+                    <DatePicker
+                      placeholder="12/10/2022"
+                      className="rounded-[10px] p-2 w-full"
+                      onChange={onChange}
+                      format="DD/MM/YYYY"
+                    />
+                  </div>
+                </div>
               </div>
-
-              <div className="w-[50%]">
-                <p className="text-[#44444F] py-2">Kết thúc</p>
-                <DatePicker
-                  placeholder="12/10/2022"
-                  className="rounded-[10px] p-2 w-full"
-                  onChange={onChange}
-                  format="DD/MM/YYYY"
-                />
-              </div>
-            </div>
+            ))}
 
             <div className="py-2 flex items-center ">
               <PlusCircleOutlined className="text-[#30AB7E] tw-me-3" />
-              <button className="text-[#30AB7E] tw-font-semibold tw-py-2">
+              <button
+                onClick={handleAddEducation}
+                className="text-[#30AB7E] tw-font-semibold tw-py-2"
+              >
                 Thêm phần học vấn
               </button>
             </div>
@@ -344,55 +363,65 @@ const UploadCVModal = ({ onClose }) => {
 
           {/* Kinh nghiệm nghề nghiệp */}
           <div>
-            <p className="text-[#22216D] my-[25px] font-medium">Kinh nghiệm làm việc</p>
+            {experienceList.map((experience, index) => (
+              <div key={index}>
+                <p className="text-[#22216D] text-[18px] my-[25px] font-bold">
+                  Kinh nghiệm làm việc {experienceList.length > 1 ? index + 1 : ''}
+                </p>
+                <div>
+                  <p className="text-[#44444F] py-2">Tên công ty</p>
+                  <Input
+                    className="rounded-[10px] p-2"
+                    placeholder="Nhập tên công ty"
+                  ></Input>
+                </div>
 
-            <div>
-              <p className="text-[#44444F] py-2">Tên công ty</p>
-              <Input
-                className="rounded-[10px] p-2"
-                placeholder="Nhập tên công ty"
-              ></Input>
-            </div>
+                <div>
+                  <p className="text-[#44444F] py-2">Chức vụ</p>
+                  <Input
+                    className="rounded-[10px] p-2"
+                    placeholder="Nhập chức vụ làm việc"
+                  ></Input>
+                </div>
+                <div className="flex tw-gap-3">
+                  <div className="w-[50%]">
+                    <p className="text-[#44444F] py-2">Bắt đầu</p>
+                    <DatePicker
+                      placeholder="12/10/2017"
+                      className="rounded-[10px] p-2 w-full"
+                      onChange={onChange}
+                    />
+                  </div>
 
-            <div>
-              <p className="text-[#44444F] py-2">Chức vụ</p>
-              <Input
-                className="rounded-[10px] p-2"
-                placeholder="Nhập chức vụ làm việc"
-              ></Input>
-            </div>
-
-            <div className="flex tw-gap-3">
-              <div className="w-[50%]">
-                <p className="text-[#44444F] py-2">Bắt đầu</p>
-                <DatePicker
-                  placeholder="12/10/2017"
-                  className="rounded-[10px] p-2 w-full"
-                  onChange={onChange}
-                />
+                  <div className="w-[50%]">
+                    <p className="text-[#44444F] py-2">Kết thúc</p>
+                    <DatePicker
+                      placeholder="12/10/2022"
+                      className="rounded-[10px] p-2 w-full"
+                      onChange={onChange}
+                      format="DD/MM/YYYY"
+                    />
+                  </div>
+                </div>
               </div>
-
-              <div className="w-[50%]">
-                <p className="text-[#44444F] py-2">Kết thúc</p>
-                <DatePicker
-                  placeholder="12/10/2022"
-                  className="rounded-[10px] p-2 w-full"
-                  onChange={onChange}
-                  format="DD/MM/YYYY"
-                />
-              </div>
-            </div>
+            ))}
 
             <div className="flex tw-items-center py-2">
               <PlusCircleOutlined className="text-[#30AB7E] tw-me-3" />
-              <button className="text-[#30AB7E] tw-font-semibold py-2">
+              <button
+                onClick={handleAddExperience}
+                className="text-[#30AB7E] tw-font-semibold py-2"
+              >
                 Thêm phần kinh nghiệm làm việc{' '}
               </button>
             </div>
           </div>
 
+          {/* Mong muốn công việc */}
           <div>
-            <p className="text-[#22216D] my-[25px] font-medium">Mong muốn công việc</p>
+            <p className="text-[#22216D] text-[18px] my-[25px] font-bold">
+              Mong muốn công việc
+            </p>
 
             <div className="grid tw-grid-cols-3 tw-gap-3">
               <div>
