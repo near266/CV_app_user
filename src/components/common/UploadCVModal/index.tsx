@@ -20,10 +20,17 @@ import { useSnackbar } from '@/shared/snackbar';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import FormItem from 'antd/lib/form/FormItem';
-import { LICENSE_DATA_FIELD, listFeild, listGender } from '@/shared/enums/enum';
+import {
+  LICENSE_DATA_FIELD,
+  listFeild,
+  listGender,
+} from '@/components/common/UploadCVModal/shared/enum';
 import Dragger from 'antd/lib/upload/Dragger';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { UploadFile } from 'antd/es/upload';
+import { upLoadCVServiceService } from './shared/api';
+import { appLibrary } from '@/shared/utils/loading';
+import { showResponseError } from '@/shared/utils/common';
 
 const UploadCVModal = ({ onClose }) => {
   const me = useSelector((state: IRootState) => state.auth.me);
@@ -58,6 +65,26 @@ const UploadCVModal = ({ onClose }) => {
   const handleFormSubmit = () => {
     console.log('aaa', form.getFieldsValue());
     form.setFieldValue([LICENSE_DATA_FIELD.images], ['aaa']);
+  };
+
+  const addLicense = async (data) => {
+    try {
+      appLibrary.showloading();
+      const res = await upLoadCVServiceService.createFormCV(data);
+      console.log('Upload', res);
+      if (res) {
+        message.success('Thêm mới thành công');
+      }
+      appLibrary.hideloading();
+    } catch (error) {
+      appLibrary.hideloading();
+      showResponseError(error);
+      console.log(error);
+    }
+  };
+
+  const upLoadCV = () => {
+    addLicense(form.getFieldsValue());
   };
 
   return (
@@ -125,7 +152,7 @@ const UploadCVModal = ({ onClose }) => {
                     Họ & Tên <span className="text-[#EB4C4C]">*</span>
                   </p>
                   <FormItem
-                    name={LICENSE_DATA_FIELD.license_name}
+                    name={LICENSE_DATA_FIELD.fullname}
                     className="w-full"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -143,7 +170,7 @@ const UploadCVModal = ({ onClose }) => {
                     Email <span className="text-[#EB4C4C]">*</span>
                   </p>
                   <FormItem
-                    name={LICENSE_DATA_FIELD.license_email}
+                    name={LICENSE_DATA_FIELD.email}
                     className="w-full"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -161,7 +188,7 @@ const UploadCVModal = ({ onClose }) => {
                     Số điện thoại <span className="text-[#EB4C4C]">*</span>
                   </p>
                   <FormItem
-                    name={LICENSE_DATA_FIELD.license_phone}
+                    name={LICENSE_DATA_FIELD.phone_number}
                     className="w-full"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -179,7 +206,7 @@ const UploadCVModal = ({ onClose }) => {
                 <div className="col-span-1">
                   <p className="text-[#44444F] py-2">Ngày tháng năm sinh</p>
                   <FormItem
-                    name={LICENSE_DATA_FIELD.license_day}
+                    name={LICENSE_DATA_FIELD.birthday}
                     className="w-full"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -203,9 +230,10 @@ const UploadCVModal = ({ onClose }) => {
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
                     <Select
+                      bordered={false}
                       size="large"
                       placeholder="Chọn giới tính"
-                      className="!rounded-[10px] bg-white w-full"
+                      className="border rounded-[10px] bg-white w-full"
                       allowClear
                     >
                       {listGender.map((item: any) => {
@@ -229,9 +257,10 @@ const UploadCVModal = ({ onClose }) => {
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
                     <Select
+                      bordered={false}
                       size="large"
                       placeholder="Chọn lĩnh vực"
-                      className="!rounded-[10px] bg-white w-full"
+                      className="border rounded-[10px] bg-white w-full"
                       allowClear
                     >
                       {listFeild.map((item: any) => {
@@ -258,9 +287,10 @@ const UploadCVModal = ({ onClose }) => {
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
                     <Select
+                      bordered={false}
                       size="large"
                       placeholder="Tỉnh/Thành phố"
-                      className="!rounded-[10px] bg-white w-full"
+                      className="border rounded-[10px] bg-white w-full"
                       allowClear
                     ></Select>
                   </FormItem>
@@ -271,9 +301,10 @@ const UploadCVModal = ({ onClose }) => {
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
                     <Select
+                      bordered={false}
                       size="large"
                       placeholder="Quận/Huyện"
-                      className="!rounded-[10px] bg-white w-full"
+                      className="border rounded-[10px] bg-white w-full"
                       allowClear
                     ></Select>
                   </FormItem>
@@ -284,15 +315,16 @@ const UploadCVModal = ({ onClose }) => {
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
                     <Select
+                      bordered={false}
                       size="large"
                       placeholder="Xã/Phường"
-                      className="!rounded-[10px] bg-white w-full"
+                      className="border rounded-[10px] bg-white w-full"
                       allowClear
                     ></Select>
                   </FormItem>
 
                   <FormItem
-                    name={LICENSE_DATA_FIELD.license_local}
+                    name={LICENSE_DATA_FIELD.address}
                     className="col-span-3"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -329,7 +361,7 @@ const UploadCVModal = ({ onClose }) => {
                     Trường học <span className="text-[#EB4C4C]">*</span>
                   </p>
                   <FormItem
-                    name={LICENSE_DATA_FIELD.license_school}
+                    name={LICENSE_DATA_FIELD.school}
                     className="w-full"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -554,11 +586,15 @@ const UploadCVModal = ({ onClose }) => {
         </div>
 
         <div className="flex tw-justify-end tw-pe-[30px]">
-          <button className="text-white bg-[#EB4C4C] w-[110px] font-semibold p-2 mr-3 rounded-[8px]">
+          <button
+            onClick={onClose}
+            className="text-white bg-[#EB4C4C] w-[110px] font-semibold p-2 mr-3 rounded-[8px]"
+          >
             Hủy bỏ
           </button>
 
           <button
+            onClick={upLoadCV}
             type="submit"
             className="rounded-[8px] w-[110px] text-white font-semibold p-2 bg-[#403ECC]"
           >

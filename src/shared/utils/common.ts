@@ -1,5 +1,7 @@
 /* eslint-disable */
 import { getByName as getCookieByName } from './cookies';
+import { message } from 'antd';
+import { getByName } from '../axios/cookies';
 
 export function getAccessTokenFromServerSide(cookies) {
   return getCookieByName(cookies, process.env.NEXT_PUBLIC_ACCESS_TOKEN_NAME);
@@ -65,4 +67,17 @@ export function removeVietnameseTones(str) {
     ' '
   );
   return str;
+}
+export function showResponseError(error) {
+  //error type from api response
+  const { data } = error.response;
+  message.error(`${Object.values(data?.errors ?? []).join(' - ')}` ?? 'Có lỗi xảy ra');
+}
+
+export function showResponseError2(error) {
+  message.error(error ?? 'Có lỗi xảy ra');
+}
+
+export function showSuccessMessage(message) {
+  message.success(message ?? 'Thao tác thành công');
 }
