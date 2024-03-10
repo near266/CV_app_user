@@ -31,6 +31,10 @@ import { UploadFile } from 'antd/es/upload';
 import { upLoadCVServiceService } from './shared/api';
 import { appLibrary } from '@/shared/utils/loading';
 import { showResponseError } from '@/shared/utils/common';
+import axios from 'axios';
+import cities from '../../../assets/address/cities.json';
+import districts from '../../../assets/address/districts.json';
+import wards from '../../../assets/address/wards.json';
 
 const UploadCVModal = ({ onClose }) => {
   const me = useSelector((state: IRootState) => state.auth.me);
@@ -85,6 +89,15 @@ const UploadCVModal = ({ onClose }) => {
 
   const upLoadCV = () => {
     addLicense(form.getFieldsValue());
+  };
+
+  const [selectedCity, setSelectedCity] = useState<string | null>(null);
+  const [selectedDictrict, setSelectedDictrict] = useState<string | null>(null);
+  const handleCityChange = (value) => {
+    setSelectedCity(value);
+  };
+  const handleDictrictChange = (value) => {
+    setSelectedDictrict(value);
   };
 
   return (
@@ -292,7 +305,15 @@ const UploadCVModal = ({ onClose }) => {
                       placeholder="Tỉnh/Thành phố"
                       className="border rounded-[10px] bg-white w-full"
                       allowClear
-                    ></Select>
+                      onChange={handleCityChange}
+                    >
+                      <option value="">--Select a city--</option>
+                      {cities.map((city) => (
+                        <option key={city.value} value={city.value}>
+                          {city.label}
+                        </option>
+                      ))}
+                    </Select>
                   </FormItem>
 
                   <FormItem
@@ -306,7 +327,20 @@ const UploadCVModal = ({ onClose }) => {
                       placeholder="Quận/Huyện"
                       className="border rounded-[10px] bg-white w-full"
                       allowClear
-                    ></Select>
+                      onChange={handleDictrictChange}
+                    >
+                      <option value="">--Select a district--</option>
+                      {districts
+                        .filter((district) => district.parent === selectedCity)
+                        .map((filteredDistrict) => (
+                          <option
+                            key={filteredDistrict.value}
+                            value={filteredDistrict.value}
+                          >
+                            {filteredDistrict.label}
+                          </option>
+                        ))}
+                    </Select>
                   </FormItem>
 
                   <FormItem
@@ -320,7 +354,16 @@ const UploadCVModal = ({ onClose }) => {
                       placeholder="Xã/Phường"
                       className="border rounded-[10px] bg-white w-full"
                       allowClear
-                    ></Select>
+                    >
+                      <option value="">--Select a district--</option>
+                      {wards
+                        .filter((ward) => ward.parent === selectedDictrict)
+                        .map((filteredWard) => (
+                          <option key={filteredWard.value} value={filteredWard.value}>
+                            {filteredWard.label}
+                          </option>
+                        ))}
+                    </Select>
                   </FormItem>
 
                   <FormItem

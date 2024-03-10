@@ -1,3 +1,4 @@
+import { axiosInstanceV4 } from '@/shared/axios';
 import { IGetListLicenseReq } from './uploadCV';
 import axios from 'axios';
 
