@@ -4,21 +4,22 @@ export enum LICENSE_DATA_FIELD {
   email = 'email',
   phone_number = 'phone_number',
   address = 'address',
-  school = 'school',
-  license_specialized = 'license_specialized',
   start_day = 'start_day',
   end_day = 'end_day',
-  selling_price = 'selling_price',
-  listed_price = 'listed_price',
   period = 'period',
   field = 'field',
   province = 'province',
   district = 'district',
   wards = 'wards',
-  description = 'description',
-  status = 'status',
-  images = 'images',
-  created_date = 'created_date',
+  cv_path = 'cv_path',
+  cv_edu = 'cv_edu',
+  cv_exp = 'cv_exp',
+}
+
+// Sub fields of cv_edu
+export enum CV_EDU_DATA_FIELD {
+  school = 'school',
+  major = 'major',
 }
 
 export const listGender = [
@@ -48,23 +49,5 @@ export const listFeild = [
   {
     label: 'Quản trị kinh doanh',
     value: 2,
-  },
-];
-export const listTinh = [
-  {
-    label: 'Hà Nội',
-    value: 0,
-  },
-];
-export const listHuyen = [
-  {
-    label: 'Cầu Giấy',
-    value: 0,
-  },
-];
-export const listXa = [
-  {
-    label: 'Khương Trung',
-    value: 0,
   },
 ];

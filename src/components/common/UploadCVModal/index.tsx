@@ -18,9 +18,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IRootState, setAuthUser } from '@/store';
 import { useSnackbar } from '@/shared/snackbar';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormItem from 'antd/lib/form/FormItem';
 import {
+  CV_EDU_DATA_FIELD,
   LICENSE_DATA_FIELD,
   listFeild,
   listGender,
@@ -35,6 +36,7 @@ import axios from 'axios';
 import cities from '../../../assets/address/cities.json';
 import districts from '../../../assets/address/districts.json';
 import wards from '../../../assets/address/wards.json';
+import { IGetListLicenseReq } from './shared/uploadCV';
 
 const UploadCVModal = ({ onClose }) => {
   const me = useSelector((state: IRootState) => state.auth.me);
@@ -42,7 +44,7 @@ const UploadCVModal = ({ onClose }) => {
   const snackbar = useSnackbar();
   const [form] = Form.useForm();
   const avatarFile = Form.useWatch<UploadChangeParam<UploadFile<any>>>(
-    LICENSE_DATA_FIELD.images,
+    LICENSE_DATA_FIELD.cv_path,
     form
   );
   const [listImgEdit, setListImgEdit] = useState<string[]>([]);
@@ -66,38 +68,88 @@ const UploadCVModal = ({ onClose }) => {
     console.log(date, dateString);
   };
 
-  const handleFormSubmit = () => {
-    console.log('aaa', form.getFieldsValue());
-    form.setFieldValue([LICENSE_DATA_FIELD.images], ['aaa']);
-  };
-
-  const addLicense = async (data) => {
-    try {
-      appLibrary.showloading();
-      const res = await upLoadCVServiceService.createFormCV(data);
-      console.log('Upload', res);
-      if (res) {
-        message.success('Thêm mới thành công');
-      }
-      appLibrary.hideloading();
-    } catch (error) {
-      appLibrary.hideloading();
-      showResponseError(error);
-      console.log(error);
-    }
-  };
-
-  const upLoadCV = () => {
-    addLicense(form.getFieldsValue());
-  };
-
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
   const [selectedDictrict, setSelectedDictrict] = useState<string | null>(null);
+  const [selectedWard, setSelectedWard] = useState<string | null>(null);
   const handleCityChange = (value) => {
     setSelectedCity(value);
   };
   const handleDictrictChange = (value) => {
     setSelectedDictrict(value);
+  };
+  const handleWardChange = (value) => {
+    setSelectedWard(value);
+  };
+
+  const handleFormSubmit = async () => {
+    try {
+      await form.validateFields();
+      const formData = form.getFieldsValue();
+
+      const address = [
+        selectedWard,
+        selectedDictrict,
+        selectedCity,
+        form.getFieldValue(LICENSE_DATA_FIELD.address),
+      ]
+        .filter(Boolean)
+        .join(', ');
+      formData[LICENSE_DATA_FIELD.address] = address;
+
+      // Logging the formData
+      console.log('formData:', formData);
+
+      // Constructing the body for the request
+      const requestBody: IGetListLicenseReq = {
+        fullname: formData[LICENSE_DATA_FIELD.fullname],
+        apply_position: null,
+        phone_number: formData[LICENSE_DATA_FIELD.phone_number],
+        email: formData[LICENSE_DATA_FIELD.email],
+        birthday: formData[LICENSE_DATA_FIELD.birthday]?.format('YYYY-MM-DD'),
+        address: formData[LICENSE_DATA_FIELD.address],
+        status: 0,
+        assessment_id: 153,
+        assessment_result_id: 153,
+        cv_Update_Cvs: {
+          assessment_id: null,
+          user_id: null,
+          note: null,
+          position_desire: null,
+          type_work: null,
+          cv_path: null,
+          status: null,
+          created_at: null,
+        },
+        cv_edu: formData[LICENSE_DATA_FIELD.cv_edu].map((eduItem) => ({
+          school: eduItem.school,
+          major: eduItem.major,
+          detail: null,
+          start_day: eduItem.start_day.format('YYYY-MM-DD'),
+          end_day: eduItem.end_day.format('YYYY-MM-DD'), // Make sure to format the date as needed
+        })),
+        cv_exp: formData[LICENSE_DATA_FIELD.cv_exp].map((expItem) => ({
+          company: null,
+          position: null,
+          detail: null,
+          period: null,
+        })),
+        created_by: null,
+        updated_by: null,
+      };
+
+      console.log('requestBody:', requestBody);
+
+      // Make your API call with the requestBody
+      const response = await upLoadCVServiceService.createFormCV(formData);
+      if (response) {
+        message.success('Upload thành công');
+      } else {
+        message.error('Upload thất bại');
+      }
+    } catch (error) {
+      console.error('Error while uploading CV:', error);
+      message.error('Có lỗi xảy ra khi upload CV');
+    }
   };
 
   return (
@@ -295,7 +347,7 @@ const UploadCVModal = ({ onClose }) => {
 
                 <div className="gap-3 grid tw-grid-cols-6 tw-grid-rows-1">
                   <FormItem
-                    name={LICENSE_DATA_FIELD.province}
+                    // name={LICENSE_DATA_FIELD.province}
                     className="col-span-1"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -307,7 +359,6 @@ const UploadCVModal = ({ onClose }) => {
                       allowClear
                       onChange={handleCityChange}
                     >
-                      <option value="">--Select a city--</option>
                       {cities.map((city) => (
                         <option key={city.value} value={city.value}>
                           {city.label}
@@ -317,7 +368,7 @@ const UploadCVModal = ({ onClose }) => {
                   </FormItem>
 
                   <FormItem
-                    name={LICENSE_DATA_FIELD.district}
+                    // name={LICENSE_DATA_FIELD.district}
                     className="col-span-1"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -329,7 +380,6 @@ const UploadCVModal = ({ onClose }) => {
                       allowClear
                       onChange={handleDictrictChange}
                     >
-                      <option value="">--Select a district--</option>
                       {districts
                         .filter((district) => district.parent === selectedCity)
                         .map((filteredDistrict) => (
@@ -344,7 +394,7 @@ const UploadCVModal = ({ onClose }) => {
                   </FormItem>
 
                   <FormItem
-                    name={LICENSE_DATA_FIELD.wards}
+                    // name={LICENSE_DATA_FIELD.wards}
                     className="col-span-1"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -354,8 +404,8 @@ const UploadCVModal = ({ onClose }) => {
                       placeholder="Xã/Phường"
                       className="border rounded-[10px] bg-white w-full"
                       allowClear
+                      onChange={handleWardChange}
                     >
-                      <option value="">--Select a district--</option>
                       {wards
                         .filter((ward) => ward.parent === selectedDictrict)
                         .map((filteredWard) => (
@@ -404,7 +454,7 @@ const UploadCVModal = ({ onClose }) => {
                     Trường học <span className="text-[#EB4C4C]">*</span>
                   </p>
                   <FormItem
-                    name={LICENSE_DATA_FIELD.school}
+                    name={CV_EDU_DATA_FIELD.school}
                     className="w-full"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -421,7 +471,7 @@ const UploadCVModal = ({ onClose }) => {
                     Chuyên ngành <span className="text-[#EB4C4C]">*</span>
                   </p>
                   <FormItem
-                    name={LICENSE_DATA_FIELD.license_specialized}
+                    name={CV_EDU_DATA_FIELD.major}
                     className="w-full"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -592,7 +642,11 @@ const UploadCVModal = ({ onClose }) => {
             <p className="font-[400] mb-1 text-[14px] text-[#696974] ">
               (Định dạng file .doc, .docx, .pdf dung lượng không lớn hơn 5 MB)
             </p>
-            <FormItem name={LICENSE_DATA_FIELD.images || ''} className="w-full h-full">
+            <FormItem
+              name={LICENSE_DATA_FIELD.cv_path}
+              // rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
+              className="w-full h-full"
+            >
               <Dragger
                 className="h-full bg-[#F1F1F5] !rounded-[10px] !border-[3px] !border-dashed border-[#D5D5DC] !overflow-hidden"
                 maxCount={1}
@@ -637,7 +691,6 @@ const UploadCVModal = ({ onClose }) => {
           </button>
 
           <button
-            onClick={upLoadCV}
             type="submit"
             className="rounded-[8px] w-[110px] text-white font-semibold p-2 bg-[#403ECC]"
           >

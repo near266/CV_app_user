@@ -2,17 +2,10 @@ import { axiosInstanceV4 } from '@/shared/axios';
 import { IGetListLicenseReq } from './uploadCV';
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_UPLOAD_CV;
-
 class UploadCVServiceService {
-  createFormCV = async (params: any) => {
-    try {
-      const { data } = await axios.post(`${API_URL}/enterprise/createForm`, params);
-      return data;
-    } catch (error) {
-      console.error('Error creating form CV:', error);
-      throw error;
-    }
+  createFormCV = async (formData: FormData) => {
+    const response = await axiosInstanceV4.post('/enterprise/createForm', FormData);
+    return response.data;
   };
 }
 
