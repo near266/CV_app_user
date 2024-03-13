@@ -3,8 +3,8 @@ import { IGetListLicenseReq } from './uploadCV';
 import axios from 'axios';
 
 class UploadCVServiceService {
-  createFormCV = async (formData: FormData) => {
-    const response = await axiosInstanceV4.post('/enterprise/createForm', FormData);
+  createFormCV = async (param) => {
+    const response = await axiosInstanceV4.post('/enterprise/createForm', param);
     return response.data;
   };
 }

@@ -12,6 +12,7 @@ import SrcIcons from '@/assets/icons';
 import styles from './indexModal.module.scss';
 import TextArea from 'antd/lib/input/TextArea';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import moment from 'moment';
 import locale from 'yup/lib/locale';
 import 'dayjs/locale/zh-cn';
 import { useDispatch, useSelector } from 'react-redux';
@@ -47,6 +48,7 @@ const UploadCVModal = ({ onClose }) => {
     LICENSE_DATA_FIELD.cv_path,
     form
   );
+  const getDataAssessment = useSelector((state: any) => state.dataAssessment.data);
   const [listImgEdit, setListImgEdit] = useState<string[]>([]);
   const [educationList, setEducationList] = useState([{}]);
   const handleAddEducation = () => {
@@ -86,61 +88,96 @@ const UploadCVModal = ({ onClose }) => {
       await form.validateFields();
       const formData = form.getFieldsValue();
 
+      // Xác định ngày tháng năm sinh
+      const birthday = moment(formData[LICENSE_DATA_FIELD.birthday]).format('YYYY-MM-DD');
+
+      // Chuyển đổi dữ liệu từ educationList và experienceList
+      const cv_edu = educationList.map((eduItem) => ({
+        school: CV_EDU_DATA_FIELD.school,
+        major: CV_EDU_DATA_FIELD.major,
+        // detail: '',
+        // start_day: moment(eduItem.start_day).format('YYYY-MM-DD'),
+        // end_day: moment(eduItem.end_day).format('YYYY-MM-DD'),
+      }));
+
+      // const cv_exp = experienceList.map((expItem) => ({
+      //   company: expItem.company,
+      //   position: expItem.position,
+      //   detail: '', // Bổ sung thông tin chi tiết nếu cần
+      //   period: `${moment(expItem.start_day).format('YYYY-MM-DD')} - ${moment(
+      //     expItem.end_day
+      //   ).format('YYYY-MM-DD')}`,
+      // }));
+
       const address = [
+        form.getFieldValue(LICENSE_DATA_FIELD.address),
         selectedWard,
         selectedDictrict,
         selectedCity,
-        form.getFieldValue(LICENSE_DATA_FIELD.address),
       ]
         .filter(Boolean)
-        .join(', ');
+        .join('# ');
       formData[LICENSE_DATA_FIELD.address] = address;
+      if (
+        avatarFile &&
+        avatarFile.file &&
+        avatarFile.fileList &&
+        avatarFile.fileList.length > 0
+      ) {
+        // Lấy đường dẫn của file từ fileList hoặc các thuộc tính khác của avatarFile tùy theo cách bạn đã lưu trữ
+        const file = avatarFile.fileList[0];
+        const filePath = file.originFileObj.name;
 
-      // Logging the formData
-      console.log('formData:', formData);
-
-      // Constructing the body for the request
-      const requestBody: IGetListLicenseReq = {
+        if (filePath) {
+          formData[LICENSE_DATA_FIELD.cv_path] = filePath.toString();
+        }
+      }
+      const response = await upLoadCVServiceService.createFormCV({
         fullname: formData[LICENSE_DATA_FIELD.fullname],
-        apply_position: null,
+        apply_position: 'string',
         phone_number: formData[LICENSE_DATA_FIELD.phone_number],
         email: formData[LICENSE_DATA_FIELD.email],
-        birthday: formData[LICENSE_DATA_FIELD.birthday]?.format('YYYY-MM-DD'),
+        birthday: 'string',
         address: formData[LICENSE_DATA_FIELD.address],
         status: 0,
-        assessment_id: 153,
-        assessment_result_id: 153,
+        created_at: '2024-03-13T03:09:47.342Z',
+        updated_at: '2024-03-13T03:09:47.342Z',
+        created_by: 'string',
+        updated_by: 'string',
+        assessment_id: getDataAssessment,
+        assessment_result_id: 0,
         cv_Update_Cvs: {
-          assessment_id: null,
-          user_id: null,
-          note: null,
-          position_desire: null,
-          type_work: null,
-          cv_path: null,
-          status: null,
-          created_at: null,
+          user_id: '947',
+          note: 'string',
+          position_desire: 'string',
+          salary_desire: 'string',
+          type_work: 'string',
+          cv_path: formData[LICENSE_DATA_FIELD.cv_path],
+          status: 0,
+          created_at: '2024-03-13T03:09:47.342Z',
         },
-        cv_edu: formData[LICENSE_DATA_FIELD.cv_edu].map((eduItem) => ({
-          school: eduItem.school,
-          major: eduItem.major,
-          detail: null,
-          start_day: eduItem.start_day.format('YYYY-MM-DD'),
-          end_day: eduItem.end_day.format('YYYY-MM-DD'), // Make sure to format the date as needed
-        })),
-        cv_exp: formData[LICENSE_DATA_FIELD.cv_exp].map((expItem) => ({
-          company: null,
-          position: null,
-          detail: null,
-          period: null,
-        })),
-        created_by: null,
-        updated_by: null,
-      };
+        cv_edu: [
+          {
+            school: 'string',
+            major: 'string',
+            detail: 'string',
+            period: 'string',
+            created_at: '2024-03-13T03:09:47.342Z',
+            updated_at: '2024-03-13T03:09:47.342Z',
+          },
+        ],
+        cv_exp: [
+          {
+            company: 'string',
+            position: 'string',
+            detail: 'string',
+            period: 'string',
+            created_at: '2024-03-13T03:09:47.342Z',
+            update_at: '2024-03-13T03:09:47.342Z',
+          },
+        ],
+      });
 
-      console.log('requestBody:', requestBody);
-
-      // Make your API call with the requestBody
-      const response = await upLoadCVServiceService.createFormCV(formData);
       if (response) {
         message.success('Upload thành công');
       } else {
@@ -271,7 +308,7 @@ const UploadCVModal = ({ onClose }) => {
                 <div className="col-span-1">
                   <p className="text-[#44444F] py-2">Ngày tháng năm sinh</p>
                   <FormItem
-                    name={LICENSE_DATA_FIELD.birthday}
+                    // name={LICENSE_DATA_FIELD.birthday}
                     className="w-full"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -290,7 +327,7 @@ const UploadCVModal = ({ onClose }) => {
                     Giới tính <span className="text-[#EB4C4C]">*</span>
                   </p>
                   <FormItem
-                    name={LICENSE_DATA_FIELD.period}
+                    // name={LICENSE_DATA_FIELD.period}
                     className="w-full"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -317,7 +354,7 @@ const UploadCVModal = ({ onClose }) => {
                     Lĩnh vực <span className="text-[#EB4C4C]">*</span>
                   </p>
                   <FormItem
-                    name={LICENSE_DATA_FIELD.field}
+                    // name={LICENSE_DATA_FIELD.field}
                     className="w-full"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -487,7 +524,7 @@ const UploadCVModal = ({ onClose }) => {
                   <div className=" tw-w-[50%]">
                     <p className="text-[#44444F] py-2">Bắt đầu</p>
                     <FormItem
-                      name={LICENSE_DATA_FIELD.start_day}
+                      // name={LICENSE_DATA_FIELD.start_day}
                       className="w-full"
                       rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                     >
@@ -504,7 +541,7 @@ const UploadCVModal = ({ onClose }) => {
                   <div className=" tw-w-[50%]">
                     <p className="text-[#44444F] py-2">Kết thúc</p>
                     <FormItem
-                      name={LICENSE_DATA_FIELD.end_day}
+                      // name={LICENSE_DATA_FIELD.end_day}
                       className="w-full"
                       rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                     >

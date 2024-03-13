@@ -5,12 +5,13 @@ import { IRootState } from '@/store';
 import { isEmpty } from 'lodash-es';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AssessmentInfo from '../../components/AssessmentInfo';
 import MustPaidModalContent from '../../components/MustPaidModal';
 import { testService } from '../../shared/testAssessmentService';
 import { AssessmentStatus } from '../../shared/variables';
 import dynamic from 'next/dynamic';
+import { getDataAssessment } from '@/store/modules/assessment';
 
 const TestSuggest = dynamic(() => import('../../components/TestSuggest'), { ssr: false });
 const CustomModal = dynamic(() => import('@/components/common/ConfirmModal'), {
@@ -42,7 +43,7 @@ const AssesmentDetail: React.FC<IProps> = ({ assessment }: IProps) => {
     testTutorial,
   } = assessment;
   const router = useRouter();
-
+  const Dispatch = useDispatch();
   const [questionState, setQuestionState] = useState(questions);
   const [assessmentStatus, setAssessmentStatus] = useState(AssessmentStatus.START);
   const snackbar = useSnackbar();
@@ -116,6 +117,8 @@ const AssesmentDetail: React.FC<IProps> = ({ assessment }: IProps) => {
       router
         .push(`/danh-gia-nang-luc/ket-qua/${slug}`)
         .finally(() => appLibrary.hideloading());
+      console.log('Thưởng lấy ID: ', assessment.id);
+      Dispatch(getDataAssessment(assessment.id));
     } catch (error) {
       appLibrary.hideloading();
       snackbar.showMessage('Đã có lỗi xảy ra!', 'error');

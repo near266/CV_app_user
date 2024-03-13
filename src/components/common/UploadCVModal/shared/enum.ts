@@ -12,8 +12,6 @@ export enum LICENSE_DATA_FIELD {
   district = 'district',
   wards = 'wards',
   cv_path = 'cv_path',
-  cv_edu = 'cv_edu',
-  cv_exp = 'cv_exp',
 }
 
 // Sub fields of cv_edu
