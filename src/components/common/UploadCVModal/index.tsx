@@ -23,6 +23,7 @@ import React, { useEffect, useState } from 'react';
 import FormItem from 'antd/lib/form/FormItem';
 import {
   CV_EDU_DATA_FIELD,
+  CV_EXP_DATA_FIELD,
   LICENSE_DATA_FIELD,
   listFeild,
   listGender,
@@ -31,13 +32,10 @@ import Dragger from 'antd/lib/upload/Dragger';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { UploadFile } from 'antd/es/upload';
 import { upLoadCVServiceService } from './shared/api';
-import { appLibrary } from '@/shared/utils/loading';
-import { showResponseError } from '@/shared/utils/common';
 import axios from 'axios';
 import cities from '../../../assets/address/cities.json';
 import districts from '../../../assets/address/districts.json';
 import wards from '../../../assets/address/wards.json';
-import { IGetListLicenseReq } from './shared/uploadCV';
 
 const UploadCVModal = ({ onClose }) => {
   const me = useSelector((state: IRootState) => state.auth.me);
@@ -89,25 +87,7 @@ const UploadCVModal = ({ onClose }) => {
       const formData = form.getFieldsValue();
 
       // Xác định ngày tháng năm sinh
-      const birthday = moment(formData[LICENSE_DATA_FIELD.birthday]).format('YYYY-MM-DD');
-
-      // Chuyển đổi dữ liệu từ educationList và experienceList
-      const cv_edu = educationList.map((eduItem) => ({
-        school: CV_EDU_DATA_FIELD.school,
-        major: CV_EDU_DATA_FIELD.major,
-        // detail: '',
-        // start_day: moment(eduItem.start_day).format('YYYY-MM-DD'),
-        // end_day: moment(eduItem.end_day).format('YYYY-MM-DD'),
-      }));
-
-      // const cv_exp = experienceList.map((expItem) => ({
-      //   company: expItem.company,
-      //   position: expItem.position,
-      //   detail: '', // Bổ sung thông tin chi tiết nếu cần
-      //   period: `${moment(expItem.start_day).format('YYYY-MM-DD')} - ${moment(
-      //     expItem.end_day
-      //   ).format('YYYY-MM-DD')}`,
-      // }));
+      const birthday = moment(formData[LICENSE_DATA_FIELD.birthday]).format('DD-MM-YYYY');
 
       const address = [
         form.getFieldValue(LICENSE_DATA_FIELD.address),
@@ -132,12 +112,18 @@ const UploadCVModal = ({ onClose }) => {
           formData[LICENSE_DATA_FIELD.cv_path] = filePath.toString();
         }
       }
+
+      const startDay = moment(formData[CV_EDU_DATA_FIELD.start_day]);
+      console.log('Ngày bắt đầu: ', startDay);
+      const endDay = moment(formData[CV_EDU_DATA_FIELD.end_day]);
+      const period = endDay.diff(startDay, 'months').toString();
+
       const response = await upLoadCVServiceService.createFormCV({
         fullname: formData[LICENSE_DATA_FIELD.fullname],
         apply_position: 'string',
         phone_number: formData[LICENSE_DATA_FIELD.phone_number],
         email: formData[LICENSE_DATA_FIELD.email],
-        birthday: 'string',
+        birthday: birthday,
         address: formData[LICENSE_DATA_FIELD.address],
         status: 0,
         created_at: '2024-03-13T03:09:47.342Z',
@@ -158,18 +144,18 @@ const UploadCVModal = ({ onClose }) => {
         },
         cv_edu: [
           {
-            school: 'string',
-            major: 'string',
+            school: formData[CV_EDU_DATA_FIELD.school],
+            major: formData[CV_EDU_DATA_FIELD.major],
             detail: 'string',
-            period: 'string',
+            period: period,
             created_at: '2024-03-13T03:09:47.342Z',
             updated_at: '2024-03-13T03:09:47.342Z',
           },
         ],
         cv_exp: [
           {
-            company: 'string',
-            position: 'string',
+            company: formData[CV_EXP_DATA_FIELD.company],
+            position: formData[CV_EXP_DATA_FIELD.position],
             detail: 'string',
             period: 'string',
             created_at: '2024-03-13T03:09:47.342Z',
@@ -306,9 +292,11 @@ const UploadCVModal = ({ onClose }) => {
 
               <div className="gap-3 grid tw-grid-cols-6 tw-grid-rows-1">
                 <div className="col-span-1">
-                  <p className="text-[#44444F] py-2">Ngày tháng năm sinh</p>
+                  <p className="text-[#44444F] py-2">
+                    Ngày tháng năm sinh <span className="text-[#EB4C4C]">*</span>
+                  </p>
                   <FormItem
-                    // name={LICENSE_DATA_FIELD.birthday}
+                    name={LICENSE_DATA_FIELD.birthday}
                     className="w-full"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -327,7 +315,7 @@ const UploadCVModal = ({ onClose }) => {
                     Giới tính <span className="text-[#EB4C4C]">*</span>
                   </p>
                   <FormItem
-                    // name={LICENSE_DATA_FIELD.period}
+                    name={LICENSE_DATA_FIELD.gender}
                     className="w-full"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -384,7 +372,7 @@ const UploadCVModal = ({ onClose }) => {
 
                 <div className="gap-3 grid tw-grid-cols-6 tw-grid-rows-1">
                   <FormItem
-                    // name={LICENSE_DATA_FIELD.province}
+                    name={LICENSE_DATA_FIELD.province}
                     className="col-span-1"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -405,7 +393,7 @@ const UploadCVModal = ({ onClose }) => {
                   </FormItem>
 
                   <FormItem
-                    // name={LICENSE_DATA_FIELD.district}
+                    name={LICENSE_DATA_FIELD.district}
                     className="col-span-1"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -431,7 +419,7 @@ const UploadCVModal = ({ onClose }) => {
                   </FormItem>
 
                   <FormItem
-                    // name={LICENSE_DATA_FIELD.wards}
+                    name={LICENSE_DATA_FIELD.wards}
                     className="col-span-1"
                     rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                   >
@@ -524,7 +512,7 @@ const UploadCVModal = ({ onClose }) => {
                   <div className=" tw-w-[50%]">
                     <p className="text-[#44444F] py-2">Bắt đầu</p>
                     <FormItem
-                      // name={LICENSE_DATA_FIELD.start_day}
+                      name={CV_EDU_DATA_FIELD.start_day}
                       className="w-full"
                       rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                     >
@@ -541,7 +529,7 @@ const UploadCVModal = ({ onClose }) => {
                   <div className=" tw-w-[50%]">
                     <p className="text-[#44444F] py-2">Kết thúc</p>
                     <FormItem
-                      // name={LICENSE_DATA_FIELD.end_day}
+                      name={CV_EDU_DATA_FIELD.end_day}
                       className="w-full"
                       rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
                     >
@@ -585,20 +573,31 @@ const UploadCVModal = ({ onClose }) => {
                     ''
                   )}
                 </div>
-                <div>
-                  <p className="text-[#44444F] py-2">Tên công ty</p>
-                  <Input
-                    className="rounded-[10px] p-2"
-                    placeholder="Nhập tên công ty"
-                  ></Input>
+                <div className="w-full">
+                  <p className="text-[#44444F] py-2">
+                    Tên công ty <span className="text-[#EB4C4C]"></span>
+                  </p>
+                  <FormItem name={CV_EXP_DATA_FIELD.company} className="w-full">
+                    <Input
+                      size="large"
+                      className="rounded-[10px] p-2"
+                      placeholder="Nhập tên công ty"
+                      allowClear
+                    ></Input>
+                  </FormItem>
                 </div>
-
-                <div>
-                  <p className="text-[#44444F] py-2">Chức vụ</p>
-                  <Input
-                    className="rounded-[10px] p-2"
-                    placeholder="Nhập chức vụ làm việc"
-                  ></Input>
+                <div className="w-full">
+                  <p className="text-[#44444F] py-2">
+                    Chức vụ <span className="text-[#EB4C4C]"></span>
+                  </p>
+                  <FormItem name={CV_EXP_DATA_FIELD.position} className="w-full">
+                    <Input
+                      size="large"
+                      className="rounded-[10px] p-2"
+                      placeholder="Nhập chức vụ làm việc"
+                      allowClear
+                    ></Input>
+                  </FormItem>
                 </div>
                 <div className="flex tw-gap-3">
                   <div className="w-[50%]">
@@ -681,7 +680,7 @@ const UploadCVModal = ({ onClose }) => {
             </p>
             <FormItem
               name={LICENSE_DATA_FIELD.cv_path}
-              // rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
+              rules={[{ required: true, message: 'Trường này là bắt buộc' }]}
               className="w-full h-full"
             >
               <Dragger

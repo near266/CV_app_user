@@ -4,20 +4,29 @@ export enum LICENSE_DATA_FIELD {
   email = 'email',
   phone_number = 'phone_number',
   address = 'address',
-  start_day = 'start_day',
-  end_day = 'end_day',
   period = 'period',
   field = 'field',
   province = 'province',
   district = 'district',
   wards = 'wards',
   cv_path = 'cv_path',
+  gender = 'gender',
 }
 
 // Sub fields of cv_edu
 export enum CV_EDU_DATA_FIELD {
   school = 'school',
   major = 'major',
+  start_day = 'start_day',
+  end_day = 'end_day',
+}
+
+export enum CV_EXP_DATA_FIELD {
+  company = 'company',
+  major = 'major',
+  position = 'position',
+  start_day_exp = 'start_day_exp',
+  end_day_exp = 'end_day_exp',
 }
 
 export const listGender = [
