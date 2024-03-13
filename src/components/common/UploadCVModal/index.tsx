@@ -39,6 +39,7 @@ import wards from '../../../assets/address/wards.json';
 
 const UploadCVModal = ({ onClose }) => {
   const me = useSelector((state: IRootState) => state.auth.me);
+  const [selectedFile, setSelectedFile] = useState(null);
   const dispatch = useDispatch();
   const snackbar = useSnackbar();
   const [form] = Form.useForm();
@@ -49,6 +50,8 @@ const UploadCVModal = ({ onClose }) => {
   const getDataAssessment = useSelector((state: any) => state.dataAssessment.data);
   const [listImgEdit, setListImgEdit] = useState<string[]>([]);
   const [educationList, setEducationList] = useState([{}]);
+  const [path_CV, setPathCV] = useState("");
+
   const handleAddEducation = () => {
     setEducationList([...educationList, {}]); // Thêm một phần học vấn mới vào danh sách
   };
@@ -63,7 +66,24 @@ const UploadCVModal = ({ onClose }) => {
   const handleRemoveExperience = (indexToRemove) => {
     setExperienceList(experienceList.filter((_, index) => index !== indexToRemove));
   };
-
+  const handleFileChange = async (file) => {
+    try {
+      // Tạo formData để chứa tệp cần upload
+      const formData = new FormData();
+      formData.append('file', file);
+  
+      // Gọi hàm createUploadFile với formData chứa tệp cần upload
+      const uploadResult = await upLoadCVServiceService.createUploadFile(formData);
+      setPathCV(uploadResult.filename)
+      // Xử lý kết quả từ việc upload file
+      console.log('Upload result:', uploadResult.filename);
+      
+      // Cập nhật trạng thái hoặc thực hiện hành động phù hợp với kết quả
+    } catch (error) {
+      // Xử lý lỗi nếu có
+      console.error('Error uploading file:', error);
+    }
+  };
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {
     console.log(date, dateString);
   };
@@ -112,7 +132,7 @@ const UploadCVModal = ({ onClose }) => {
           formData[LICENSE_DATA_FIELD.cv_path] = filePath.toString();
         }
       }
-
+      
       const startDay = moment(formData[CV_EDU_DATA_FIELD.start_day]);
       console.log('Ngày bắt đầu: ', startDay);
       const endDay = moment(formData[CV_EDU_DATA_FIELD.end_day]);
@@ -131,14 +151,13 @@ const UploadCVModal = ({ onClose }) => {
         created_by: 'string',
         updated_by: 'string',
         assessment_id: getDataAssessment,
-        assessment_result_id: 0,
         cv_Update_Cvs: {
-          user_id: '947',
+          user_id: 'd34946297fb64ff9824b4d4c390ba83a',
           note: 'string',
           position_desire: 'string',
           salary_desire: 'string',
           type_work: 'string',
-          cv_path: formData[LICENSE_DATA_FIELD.cv_path],
+          cv_path: path_CV,
           status: 0,
           created_at: '2024-03-13T03:09:47.342Z',
         },
@@ -173,6 +192,7 @@ const UploadCVModal = ({ onClose }) => {
       console.error('Error while uploading CV:', error);
       message.error('Có lỗi xảy ra khi upload CV');
     }
+
   };
 
   return (
@@ -686,7 +706,12 @@ const UploadCVModal = ({ onClose }) => {
               <Dragger
                 className="h-full bg-[#F1F1F5] !rounded-[10px] !border-[3px] !border-dashed border-[#D5D5DC] !overflow-hidden"
                 maxCount={1}
-                onChange={(info) => {}}
+                onChange={(info) => {
+                    const file = info.file.originFileObj; // Lấy tệp từ sự kiện thay đổi
+                if (file) {
+                  handleFileChange(file); // Gọi hàm xử lý khi có tệp được chọn
+                }}
+              }
                 // showUploadList={false}
                 fileList={avatarFile?.fileList}
               >
