@@ -37,7 +37,7 @@ const Topics = (props) => {
         </div>
         {/* <div className={styles.topic_content}>
           <p>
-            Youth+ Vietnam cung cấp cho các bạn trẻ một không gian đọc – học, tìm kiếm –
+            Eztek Vietnam cung cấp cho các bạn trẻ một không gian đọc – học, tìm kiếm –
             kết nối và chia sẻ – hỏi đáp với lăng kính đa chiều, nhiều màu sắc trong nhiều
             lĩnh vực.
           </p>

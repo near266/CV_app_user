@@ -4,7 +4,7 @@ import Home from '@/modules/Home';
 const Page = () => {
   return (
     <>
-      <HtmlHeader title="Trang chủ - Youth+" />
+      <HtmlHeader title="Trang chủ - Eztekfhausihfosdho" />
       <Home />
     </>
   );

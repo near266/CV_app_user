@@ -7,7 +7,7 @@ import SearchBar from '@/layouts/components/SearchBar';
 const Page = () => {
   return (
     <>
-      <HtmlHeader title="Tất cả bài viết - Youth+" />
+      <HtmlHeader title="Tất cả bài viết - Eztek" />
       <NoSsr>
         <List apiUrl="posts" />
       </NoSsr>

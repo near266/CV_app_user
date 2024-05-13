@@ -123,7 +123,7 @@ const ManagementCV = () => {
           <div className="w-[70%]">
             <div className="flex tw-justify-between pb-[50px] tw-mb-5 tw-border-b-2 border-[#E2E2EA]">
               <p className="text-[#22216D] text-[20px] tw-font-semibold">
-                Hồ sơ đã tạo trên YOUTH+
+                Hồ sơ đã tạo trên Eztek
               </p>
 
               <button className="bg-[#403ECC] tw-text-white tw-p-2 tw-rounded-[8px]">
@@ -133,7 +133,7 @@ const ManagementCV = () => {
 
             <div className="flex tw-justify-between">
               <p className="text-[#22216D] text-[20px] tw-font-semibold">
-                Hồ sơ đã tải lên YOUTH+
+                Hồ sơ đã tải lên Eztek
               </p>
 
               <button className="bg-[#403ECC] tw-text-white tw-p-2 tw-rounded-[8px]">
@@ -161,10 +161,10 @@ const ManagementCV = () => {
                 <div>
                   <p className="text-[#30AB7E]">Trạng thái tìm việc đang bật</p>
                   <p>
-                    Bật tìm việc để nhận được nhiều cơ hội việc làm tốt nhất từ YOUTH+
+                    Bật tìm việc để nhận được nhiều cơ hội việc làm tốt nhất từ Eztek
                   </p>
                   <p>
-                    Cho phép các Nhà tuyển dụng đã được YOUTH+ xác thực xem CV Online để
+                    Cho phép các Nhà tuyển dụng đã được Eztek xác thực xem CV Online để
                     có thể liên hệ với bạn
                   </p>
                 </div>

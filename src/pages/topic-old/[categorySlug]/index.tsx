@@ -8,7 +8,7 @@ import ListByCategory from '@/modules/Post/pages/ListByCategory';
 const Page = ({ category }) => {
   return (
     <>
-      <HtmlHeader title={`${category.name} - Youth+`} />
+      <HtmlHeader title={`${category.name} - Eztek`} />
       <NoSsr>
         <ListByCategory category={category} />
       </NoSsr>

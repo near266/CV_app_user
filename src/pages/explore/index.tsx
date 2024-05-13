@@ -6,7 +6,7 @@ import Explore from '@/modules/Explore/pages';
 const Page = () => {
   return (
     <>
-      <HtmlHeader title="Khám phá - Youth+" />
+      <HtmlHeader title="Khám phá - Eztek" />
       <NoSsr>
         <Explore />
       </NoSsr>

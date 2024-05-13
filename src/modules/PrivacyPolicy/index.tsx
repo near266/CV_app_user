@@ -4,7 +4,7 @@ const PrivacyPolicy = () => {
   return (
     <section className={styles.page}>
       <div className="container">
-        <h1 className={styles.page__title}>Chính sách Quyền riêng tư của Youth+</h1>
+        <h1 className={styles.page__title}>Chính sách Quyền riêng tư của Eztek</h1>
 
         <div className={styles.page__catalogue}>
           <p>
@@ -17,7 +17,7 @@ const PrivacyPolicy = () => {
           </p>
           <p>
             <a href="#quy-dinh-ve-cac-noi-dung-chia-se-dang-tai">
-              3. Quy định của Youth+ về các nội dung chia sẻ, đăng tải
+              3. Quy định của Eztek về các nội dung chia sẻ, đăng tải
             </a>
           </p>
           <p>
@@ -60,7 +60,7 @@ const PrivacyPolicy = () => {
               </a>
             </h3>
             <p>
-              Cảm ơn bạn vì đã lựa chọn Youth+! Chúng tôi muốn đem lại những trải nghiệm
+              Cảm ơn bạn vì đã lựa chọn Eztek! Chúng tôi muốn đem lại những trải nghiệm
               tốt nhất cho bạn để đảm bảo bạn tận hưởng dịch vụ của chúng tôi. Để làm được
               điều này, chúng tôi cần hiểu rõ thói quen đọc bài, chia sẻ để bạn để có thể
               đem đến những dịch vụ đặc biệt và mang tính cá nhân dành riêng cho bạn.
@@ -84,7 +84,7 @@ const PrivacyPolicy = () => {
               </a>
             </h3>
             <p>
-              Youth+ nghiêm cấm tuyệt đối người sử dụng chia sẻ, đăng tải, bàn luận hay có
+              Eztek nghiêm cấm tuyệt đối người sử dụng chia sẻ, đăng tải, bàn luận hay có
               bất cứ hành vi nào nhằm mục đích:
             </p>
             <ul>
@@ -105,9 +105,9 @@ const PrivacyPolicy = () => {
               <li>Thực hiện các mục đích liên quan đến chính trị.</li>
             </ul>
             <p>
-              Người sử dụng lợi dụng việc sử dụng Youth+ nhằm tiết lộ bí mật nhà nước, bí
+              Người sử dụng lợi dụng việc sử dụng Eztek nhằm tiết lộ bí mật nhà nước, bí
               mật quân sự, an ninh, văn hóa, kinh tế, đối ngoại và những bí mật khác do
-              pháp luật quy định bằng bất cứ hình thức nào trên Youth+ ;
+              pháp luật quy định bằng bất cứ hình thức nào trên Eztek ;
             </p>
             <p>
               Quảng cáo, tuyên truyền, mua bán hàng hoá, dịch vụ bị cấm hoặc truyền bá tác
@@ -115,12 +115,12 @@ const PrivacyPolicy = () => {
             </p>
             <p>
               Thực hiện các hành vi mang tính chất thương mại trên trang mạng mà không
-              được sự đồng ý của Youth+.
+              được sự đồng ý của Eztek.
             </p>
             <p>
               Khi giao tiếp với người dùng khác, người sử dụng quấy rối, chửi bới, làm
               phiền hay có bất kỳ hành vi nào xâm phạm đến lợi ích, đến bí mật thông tin,
-              đến không gian riêng của người sử dụng khác, cũng như xâm phạm đến Youth+.
+              đến không gian riêng của người sử dụng khác, cũng như xâm phạm đến Eztek.
             </p>
             <p>
               Người sử dụng có quyền sử dụng đối với hình ảnh của mình. Khi sử dụng hình
@@ -130,7 +130,7 @@ const PrivacyPolicy = () => {
               không được sự đồng ý của người có hình ảnh.
             </p>
             <p>
-              Lợi dụng mạng xã hội Youth+ để thu thập thông tin của người sử dụng, công bố
+              Lợi dụng mạng xã hội Eztek để thu thập thông tin của người sử dụng, công bố
               thông tin, tư liệu về đời tư của người sử dụng khác.
             </p>
             <p>
@@ -146,11 +146,11 @@ const PrivacyPolicy = () => {
             <p>
               Nghiêm cấm quảng bá bất kỳ sản phẩm nào dưới bất kỳ hình thức nào, bao gồm
               nhưng không giới hạn việc gửi, truyền bất kỳ thông điệp nào mang tính quảng
-              cáo, mời gọi, thư dây truyền, cơ hội đầu tư trên Youth+ mà không được sự
-              đồng ý bằng văn bản của Youth+.
+              cáo, mời gọi, thư dây truyền, cơ hội đầu tư trên Eztek mà không được sự
+              đồng ý bằng văn bản của Eztek.
             </p>
             <p>
-              Lợi dụng Youth+ để tổ chức các hình thức cá cược, cờ bạc hoặc các thỏa thuận
+              Lợi dụng Eztek để tổ chức các hình thức cá cược, cờ bạc hoặc các thỏa thuận
               liên quan đến tiền, hiện kim, hiện vật.
             </p>
             <p>
@@ -190,7 +190,7 @@ const PrivacyPolicy = () => {
             </p>
             <p>
               Giả mạo tổ chức, cá nhân và phát tán thông tin giả mạo, thông tin sai sự
-              thật trên Youth+ xâm hại đến quyền và lợi ích hợp pháp của tổ chức, cá nhân;
+              thật trên Eztek xâm hại đến quyền và lợi ích hợp pháp của tổ chức, cá nhân;
             </p>
             <p>
               Tạo đường dẫn trái tới tên miền hợp pháp của tổ chức, cá nhân. Tạo, cài đặt,
@@ -199,7 +199,7 @@ const PrivacyPolicy = () => {
             </p>
             <p>
               Tuyệt đối không sử dụng bất kỳ chương trình, công cụ hay hình thức nào khác
-              để can thiệp vào hệ thống Youth+
+              để can thiệp vào hệ thống Eztek
             </p>
             <p>
               Không được có bất kỳ hành vi nào nhằm đăng nhập trái phép hoặc tìm cách đăng
@@ -214,7 +214,7 @@ const PrivacyPolicy = () => {
                 id="quy-dinh-ve-cac-noi-dung-chia-se-dang-tai"
                 className={styles.page__topic}
               >
-                3. Quy định của Youth+ về các nội dung chia sẻ, đăng tải
+                3. Quy định của Eztek về các nội dung chia sẻ, đăng tải
               </a>
             </h3>
             <ul>
@@ -266,7 +266,7 @@ const PrivacyPolicy = () => {
                 Khi đưa thông tin, bài viết từ sách, báo, website, diễn đàn khác, Thành
                 viên cần phải nêu rõ nguồn gốc của nội dung bài viết đó. Đối với các nguồn
                 trích dẫn không chính thống, không đảm bảo tính pháp lý, có nội dung không
-                phù hợp với tiêu chí của Youth+ , Ban Quản trị có quyền xóa, khóa, chuyển
+                phù hợp với tiêu chí của Eztek , Ban Quản trị có quyền xóa, khóa, chuyển
                 bài mà không cần thông báo trước;
               </li>
               <li>
@@ -276,7 +276,7 @@ const PrivacyPolicy = () => {
               </li>
               <li>
                 Không thực hiện hành vi quảng cáo thương mại vì mục đích khác ngoài lợi
-                ích của chủ sở hữu Youth+ . Ví dụ: Các bài viết đưa thông tin liên lạc, mô
+                ích của chủ sở hữu Eztek . Ví dụ: Các bài viết đưa thông tin liên lạc, mô
                 tả dịch vụ sản phẩm nhằm mục đích thương mại hoặc dẫn link tới các trang
                 mua bán trực tuyến
               </li>
@@ -297,7 +297,7 @@ const PrivacyPolicy = () => {
               </li>
               <li>
                 Bài viết không mang tính xây dựng, đi ngược mục tiêu và định hướng của
-                Youth+ ;
+                Eztek ;
               </li>
               <li>
                 Không chia sẻ, đăng tải các tài liệu và các thông tin khác mà người dùng
@@ -321,14 +321,14 @@ const PrivacyPolicy = () => {
               </li>
               <li>
                 Không có hành vi phá hoại, gây tổn hại, ảnh hưởng đến uy tín, hệ thống,
-                băng thông, cơ sở dữ liệu, cơ sở vật chất của Youth+ ; xâm nhập, sử dụng
+                băng thông, cơ sở dữ liệu, cơ sở vật chất của Eztek ; xâm nhập, sử dụng
                 trái phép dữ liệu, thông tin tài khoản, mật khẩu hoặc các nội dung của hệ
-                thống Youth+ dưới bất kỳ mục đích nào;
+                thống Eztek dưới bất kỳ mục đích nào;
               </li>
               <li>
                 Bài viết, hình ảnh không gắn, chèn hay cài đặt bất cứ siêu liên kết, tệp
                 tin, từ khóa bị giấu hay từ khóa không thích hợp hoặc có tính chất lừa
-                trên Youth+ .
+                trên Eztek .
               </li>
             </ul>
           </div>
@@ -362,7 +362,7 @@ const PrivacyPolicy = () => {
               hội để sử dụng dịch vụ mạng xã hội Yêu cầu doanh nghiệp mạng xã hội cung cấp
               thông tin cần thiết liên quan đến việc sử dụng dịch vụ mạng xã hội Từ chối
               sử dụng một phần hoặc toàn bộ dịch vụ mạng xã hội Được bảo đảm bí mật thông
-              tin riêng. Những thông tin mà người sử dụng cung cấp, Youth+ sẽ chỉ sử dụng
+              tin riêng. Những thông tin mà người sử dụng cung cấp, Eztek sẽ chỉ sử dụng
               để kiểm soát hoạt động trên website, sẽ không cung cấp cho bất kỳ bên thứ 3
               nào khác khi chưa có sự đồng ý của người sử dụng, trừ trường hợp có sự yêu
               cầu từ Cơ quan Nhà nước có thẩm quyền Được sử dụng các dịch vụ trên mạng xã
@@ -391,23 +391,23 @@ const PrivacyPolicy = () => {
               chúng tôi có toàn quyền chấm dứt, xóa bỏ tài khoản của người sử dụng mà
               không cần sự đồng ý của người sử dụng và không phải chịu bất cứ trách nhiệm
               nào đối với người sử dụng; Đối với mọi vi phạm của chủ tài khoản trong quá
-              trình sử dụng dịch vụ Youth+ , chúng tôi có quyền tước bỏ mọi quyền lợi của
+              trình sử dụng dịch vụ Eztek , chúng tôi có quyền tước bỏ mọi quyền lợi của
               chủ tài khoản đối với việc sử dụng dịch vụ cũng như sẽ đề nghị cơ quan chức
               năng truy tố Người sử dụng trước pháp luật nếu cần thiết; Khi phát hiện
               những vi phạm như sử dụng hacks, truyền bá nội dung cấm hoặc những lỗi khác,
-              Youth+ có quyền sử dụng những thông tin mà Người sử dụng cung cấp khi đăng
+              Eztek có quyền sử dụng những thông tin mà Người sử dụng cung cấp khi đăng
               ký tài khoản để chuyển cho Cơ quan chức năng giải quyết theo quy định của
               pháp luật; Khi phát hiện những vi phạm về nội dung cấm đăng tải được quy
-              định tại Thỏa thuận này, Youth+ có quyền tắt ngay lập tức các nội dung đang
+              định tại Thỏa thuận này, Eztek có quyền tắt ngay lập tức các nội dung đang
               được phát sóng, chia sẻ, đăng tải bởi Người sử dụng và/hoặc cảnh cáo, khóa,
               tạm dừng chat của Người sử dụng vi phạm. Trong trường hợp nhận được tố cáo
-              của Người sử dụng khác, Youth+ sẽ tiến hành giám sát kiểm tra và log data
-              cùng những chứng cứ liên quan, nếu phát hiện vi phạm Youth+ có quyền tắt
+              của Người sử dụng khác, Eztek sẽ tiến hành giám sát kiểm tra và log data
+              cùng những chứng cứ liên quan, nếu phát hiện vi phạm Eztek có quyền tắt
               ngay lập tức các nội dung đang được chia sẻ, đăng tải bởi Người sử dụng
               và/hoặc cảnh cáo, khóa, tạm dừng chat của Người sử dụng vi phạm. Chúng tôi
               có toàn quyền quyết định các hình thức xử lý đối với các trường hợp vi phạm.
               Tuy vào tính chất sự việc, mức độ ảnh hưởng và nghiêm trọng, chúng tôi sẽ
-              đưa ra hình thức xử lý phù hợp. Quyết định của YYouth+ là quyết định cuối
+              đưa ra hình thức xử lý phù hợp. Quyết định của YEztek là quyết định cuối
               cùng và người dùng đồng ý chấp hành;
             </p>
           </div>
@@ -425,22 +425,22 @@ const PrivacyPolicy = () => {
             </h3>
 
             <p>
-              Việc chia sẻ các thông tin, hình ảnh,…trên Youth+ hoàn toàn có thể gặp phải
+              Việc chia sẻ các thông tin, hình ảnh,…trên Eztek hoàn toàn có thể gặp phải
               các rủi ro, nguy hiểm (Các rủi ro này có thể là mất dữ liệu thông tin, bị
               sao lưu thông tin bởi các thành viên khác,…). Người sử dụng hoàn toàn chịu
               trách nhiệm về những rủi ro đó khi chia sẻ các thông tin, hình ảnh này.
             </p>
             <p>
               Người dùng khi cung cấp thông tin trên môi trường mạng internet nói chung và
-              trên trang Youth+ nói riêng cần thận trọng với thông tin mình cung cấp
+              trên trang Eztek nói riêng cần thận trọng với thông tin mình cung cấp
               (thông tin về tên, tuồi, địa chỉ, chứng minh thư nhân dân, số thẻ tín dụng,
               …) vì các thông tin này rất có thể bị lợi dụng như lấy cắp, dùng thông tin
               cá nhân của người dùng với mục đích khác, …
             </p>
             <p>
-              Youth+ sẽ không chịu trách nhiệm pháp lý cho những thiệt hại, những hậu quả
+              Eztek sẽ không chịu trách nhiệm pháp lý cho những thiệt hại, những hậu quả
               nảy sinh trực tiếp, gián tiếp, ngẫu nhiên từ việc truy cập hay ngoài việc
-              truy cập được tới Ứng dụng hoặc website này hoặc các trang liên kết. Youth+
+              truy cập được tới Ứng dụng hoặc website này hoặc các trang liên kết. Eztek
               và các tổ chức liên quan không phải chịu trách nhiệm đối với các yêu cầu bồi
               thường, bao gồm các khoản lệ phí pháp lý hợp lý, của bất kỳ bên thứ ba nào
               do hoặc phát sinh từ việc Người sử dụng sử dụng dịch vụ, từ nội dung mà
@@ -452,22 +452,22 @@ const PrivacyPolicy = () => {
             <p>
               Chúng tôi có quyền đơn phương xóa, ngừng hoặc hạn chế việc sử dụng các nội
               dung do thành viên chia sẻ, đăng tải vi phạm các điều khoản hoặc trái với
-              các quy định của Youth+ . Người sử dụng đồng ý rằng chúng tôi không chịu
+              các quy định của Eztek . Người sử dụng đồng ý rằng chúng tôi không chịu
               trách nhiệm pháp lý về những thông tin do thành viên đăng tải, bao gồm nhưng
               không giới hạn đối với tính xác thực của thông tin cũng như chúng tôi không
               kiểm soát cách hành xử trong cũng như ngoài Ứng dụng hoặc website của thành
               viên
             </p>
             <p>
-              Trên website của Youth+ xuất hiện link website, hoặc biểu tượng website
-              khác, những website này không thuộc kiểm soát hoặc sở hữu của Youth+ . Việc
+              Trên website của Eztek xuất hiện link website, hoặc biểu tượng website
+              khác, những website này không thuộc kiểm soát hoặc sở hữu của Eztek . Việc
               truy cập tới các trang khác này hoàn toàn có thể gặp rủi ro, nguy hiểm.Người
               sử dụng hoàn toàn chịu trách nhiệm rủi ro khi sử dụng website liên kết này.
-              Youth+ sẽ không chịu trách nhiệm về nội dung của bất kì website hoặc điểm
-              đến nào ngoài trang Youth+
+              Eztek sẽ không chịu trách nhiệm về nội dung của bất kì website hoặc điểm
+              đến nào ngoài trang Eztek
             </p>
             <p>
-              Youth+ mong muốn trở thành sân chơi trực tuyến bổ ích, công bằng và hợp
+              Eztek mong muốn trở thành sân chơi trực tuyến bổ ích, công bằng và hợp
               pháp. Vì vậy, nếu Người sử dụng phát hiện bất cứ hành vi hoặc nội dung nào
               vi phạm các thỏa thuận trên, vui lòng thông báo cho chúng tôi qua link Báo
               vi phạm hoặc gửi email về bộ phận kỹ thuật nghiệp vụ của chúng tôi
@@ -479,8 +479,8 @@ const PrivacyPolicy = () => {
             </p>
             <p>
               Các quy định này cùng với Quy định quyền riêng tư được coi là toàn bộ thỏa
-              thuận giữa Người sử dụng và Youth+ về việc Người sử dụng sử dụng dịch vụ do
-              Youth+ cung cấp. Việc Youth+ không thể thực hiện hoặc thi hành bất kỳ quyền
+              thuận giữa Người sử dụng và Eztek về việc Người sử dụng sử dụng dịch vụ do
+              Eztek cung cấp. Việc Eztek không thể thực hiện hoặc thi hành bất kỳ quyền
               hạn hoặc điều khoản nào được quy định sẽ không được coi là từ bỏ cũng như
               không chịu trách nhiệm pháp lý đối với quyền hoặc điều khoản đó tại bất kỳ
               thời điểm nào sau đó.
@@ -500,29 +500,29 @@ const PrivacyPolicy = () => {
               </a>
             </h3>
             <p>
-              Youth+ thiết lập một cơ chế giải quyết khiếu nại, tranh chấp nhằm tạo ra một
+              Eztek thiết lập một cơ chế giải quyết khiếu nại, tranh chấp nhằm tạo ra một
               cơ chế rõ ràng, tránh những tranh chấp có thể xảy ra, có khung và biện pháp
               xử lý hiệu quả.
             </p>
             <p>
-              Khi người sử dụng đăng ký tạo tài khoản và được Youth+ cung cấp tài khoản để
-              sử dụng một phần hoặc toàn bộ dịch vụ của Youth+N thì bất kỳ tranh chấp phát
+              Khi người sử dụng đăng ký tạo tài khoản và được Eztek cung cấp tài khoản để
+              sử dụng một phần hoặc toàn bộ dịch vụ của EztekN thì bất kỳ tranh chấp phát
               sinh trong quá trình sử dụng của bạn sẽ được giải quyết theo pháp luật hiện
               hành của nước Cộng hòa xã hội chủ nghĩa Việt Nam
             </p>
             <p>
-              Bất kỳ khiếu nại nào phát sinh từ Quy chế sử dụng tài khoản Youth+ này hoặc
+              Bất kỳ khiếu nại nào phát sinh từ Quy chế sử dụng tài khoản Eztek này hoặc
               thỏa thuận sử dụng dịch vụ khác phải được đệ trình trong vòng 03 (ba) tháng
               kể từ ngày xảy ra viphạm. Quy trình giải quyết khiếu nại tố cáo và bồi
-              thường được đăng tải trên website Youth+
+              thường được đăng tải trên website Eztek
             </p>
             <p>
-              Youth+ chỉ hỗ trợ, giải quyết khiếu nại, tố cáo của bạn trong trường hợp bạn
+              Eztek chỉ hỗ trợ, giải quyết khiếu nại, tố cáo của bạn trong trường hợp bạn
               đã ghi đầy đủ, trung thực và chính xác thông tin khi đăng ký tài khoản
             </p>
             <p>
               Đối với tranh chấp giữa người sử dụng với nhau hoặc giữa người sử dụng với
-              Youth+ sẽ căn cứ theo hệ thống để giải quyết. Theo đó, Youth+ sẽ bảo vệ
+              Eztek sẽ căn cứ theo hệ thống để giải quyết. Theo đó, Eztek sẽ bảo vệ
               quyền lợi tối đa có thể cho người sử dụng đăng ký đầy đủ thông tin theo quy
               định. Quyết định của YBOX.VN là quyết định cuối cùng
             </p>
@@ -547,14 +547,14 @@ const PrivacyPolicy = () => {
               </a>
             </h3>
             <p>
-              Khi các tài khoản được người sử dụng đăng ký, Youth+ sẽ được lưu trữ các
+              Khi các tài khoản được người sử dụng đăng ký, Eztek sẽ được lưu trữ các
               thông tin tại hệ thống máy chủ đặt tại Việt Nam. Các thông tin này sẽ được
-              Youth+ thực hiện việc bảo mật với các bên thứ ba, và chỉ công khai, cung cấp
+              Eztek thực hiện việc bảo mật với các bên thứ ba, và chỉ công khai, cung cấp
               trong trường hợp cần thiết theo yêu cầu từ phía cơ quan Nhà nước có thẩm
               quyền theo quy định về công khai thông tin của Nhà nước.
             </p>
             <p>
-              Trường hợp người sử dụng vi phạm các thỏa thuận với Youth+ thì việc công
+              Trường hợp người sử dụng vi phạm các thỏa thuận với Eztek thì việc công
               khai thu thập, xử lý thông tin cũng sẽ được thực hiện theo đúng các quy định
               của pháp luật.
             </p>
@@ -562,7 +562,7 @@ const PrivacyPolicy = () => {
               Thông thường, chúng tôi sử dụng các thông tin Người sử dụng cung cấp chỉ để
               hồi đáp những câu hỏi hay thực hiện các yêu cầu của Người sử dụng. Chúng tôi
               cũng có thể dùng những thông tin chúng tôi tập hợp được để thông báo đến
-              Người sử dụng những sản phẩm hoặc dịch vụ khác đang có trên Youth+ hoặc
+              Người sử dụng những sản phẩm hoặc dịch vụ khác đang có trên Eztek hoặc
               những công ty liên kết với nó hoặc để liên hệ với Người sử dụng để biết quan
               niệm của Người sử dụng về những sản phẩm và những dịch vụ hiện tại hoặc
               những sản phẩm và dịch vụ mới tiềm năng có thể được đưa ra. Thông tin cá
@@ -576,7 +576,7 @@ const PrivacyPolicy = () => {
               hưởng, tác động tiêu cực cho bên thứ ba, chúng tôi cũng có thể cung cấp,
               tiết lộ những thông tin này khi được pháp luật cho phép và trong bất cứ các
               trường hợp khác mà chúng tôi có sự xác định hợp lý rằng điều đó cần thiết để
-              cung cấp dịch vụ cho các cá nhân. Dữ liệu khách hàng của Youth+ có thể được
+              cung cấp dịch vụ cho các cá nhân. Dữ liệu khách hàng của Eztek có thể được
               chuyển nhượng cho người kế thừa hay người được chỉ định để quản lý công ty
               khi công ty bị sáp nhập, bị mua lại hoặc phá sản. Chúng tôi có một khu vực
               để Người sử dụng có thể liên lạc với chúng tôi.Bất kỳ phản hồi nào Người sử

@@ -9,7 +9,7 @@ interface IProps {
   children?: ReactNode;
 }
 
-const defaultSiteTitle = 'Youth+ Nền tảng Đọc và chia sẻ, kết nối dành cho giới trẻ';
+const defaultSiteTitle = 'Eztek Nền tảng Đọc và chia sẻ, kết nối dành cho giới trẻ';
 
 /**
  * Usage note
@@ -23,16 +23,16 @@ const HtmlHeader: FC<IProps> = ({ title, children, keepMetaData }) => {
     <>
       <meta
         name="description"
-        content="Youth+ là nơi đọc học, chia sẻ, kết nối dành cho giới trẻ"
+        content="Eztek là nơi đọc học, chia sẻ, kết nối dành cho giới trẻ"
       />
-      <meta name="keywords" content="youth, youth+, youth plus, sinh viên, giới trẻ" />
+      <meta name="keywords" content="youth, Eztek, youth plus, sinh viên, giới trẻ" />
       <meta property="og:title" content={title || defaultSiteTitle} />
       {!router.pathname.includes('post') && (
         <meta property="og:url" content="https://youth.com.vn/" />
       )}
       <meta
         property="og:description"
-        content="Youth+ là nơi đọc học, chia sẻ, kết nối dành cho giới trẻ"
+        content="Eztek là nơi đọc học, chia sẻ, kết nối dành cho giới trẻ"
       />
       {!router.pathname.includes('post') && (
         <meta
@@ -42,7 +42,7 @@ const HtmlHeader: FC<IProps> = ({ title, children, keepMetaData }) => {
       )}
       <meta
         property="og:keywords"
-        content="youth, youth+, youth plus, sinh viên, giới trẻ"
+        content="youth, Eztek, youth plus, sinh viên, giới trẻ"
       />
       <meta property="og:type" content="website" />
     </>
@@ -51,7 +51,7 @@ const HtmlHeader: FC<IProps> = ({ title, children, keepMetaData }) => {
   return (
     <Head>
       <meta charSet="utf-8" />
-      <meta name="author" content="Youth+" />
+      <meta name="author" content="Eztek" />
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0"

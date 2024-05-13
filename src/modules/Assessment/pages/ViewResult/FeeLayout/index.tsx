@@ -22,7 +22,7 @@ const FeeLayout = (props) => {
         <a href="https://academy.youth.com.vn/san-sang-su-nghiep">
           Chương trình membership
         </a>{' '}
-        của Youth+ để xem kết quả.
+        của Eztek để xem kết quả.
       </p>
       {/* <div style={{ margin: '10px 0' }}>
         <AdSense adSlot="6856900542" />

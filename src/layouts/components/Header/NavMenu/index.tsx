@@ -27,13 +27,6 @@ const menuItems = [
   },
 
   {
-    name: 'Mentors',
-    url: 'https://mentor.youth.com.vn',
-    iconUrl: '/images/icons/sidebar/community.svg',
-    yieldName: 'sidebar_cv',
-    hideOnMobile: true,
-  },
-  {
     name: 'Sự kiện',
     hideOnMobile: true,
     url: '#',
@@ -41,14 +34,7 @@ const menuItems = [
     yieldName: 'sidebar_assessment',
     children: null,
   },
-  {
-    name: 'Khóa học',
-    hideOnMobile: true,
-    url: 'https://academy.youth.com.vn',
-    iconUrl: '/images/icons/sidebar/courses.svg',
-    yieldName: 'sidebar_assessment',
-    children: null,
-  },
+
   {
     name: 'Việc làm',
     hideOnMobile: true,
@@ -106,7 +92,7 @@ const NavMenu = () => {
   const navRef = useRef(null);
 
   const activeClassName = (path) => {
-    if (!!!path) {
+    if (path===null) {
       return;
     }
     const currentPath = router.pathname;

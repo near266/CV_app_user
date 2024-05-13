@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { useFormik } from 'formik';
 import { Button } from '@mui/material';
+import { City } from '@/interfaces/IAddress';
+import cities from '@/assets/address/cities.json';
+import axios from 'axios';
+const listProvince: City[] = [];
 
 const searchBarItems = [
   {
@@ -52,15 +56,18 @@ const Search = () => {
       ${values.job ? `&work=${values.job}` : ''}`;
     },
   });
+ 
   const [provinces, setProvinces] = useState([]);
   useEffect(() => {
     const fetchProvinces = async () => {
-      const response = await fetch('https://provinces.open-api.vn/api/?depth=2');
-      const data = await response.json();
-      setProvinces(data);
+     // const response = await axios.get('assets/address/cities.json');
+      console.log(cities);
+      // const data = await response.json();
+      setProvinces(cities);
     };
     fetchProvinces();
   }, []);
+ 
   return (
     <form
       className={`${styles.search_bar}  col-12 tw-grid
@@ -95,8 +102,8 @@ const Search = () => {
                   >
                     {provinces.length > 0 &&
                       provinces.map((pro) => (
-                        <option value={pro.code} key={pro.code}>
-                          {pro.name}
+                        <option value={pro.value} key={pro.value}>
+                          {pro.value}
                         </option>
                       ))}
                   </select>

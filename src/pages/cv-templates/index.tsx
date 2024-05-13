@@ -5,7 +5,7 @@ import Initialization from '@/modules/Resume/pages/Initialization';
 const Page = () => {
   return (
     <>
-      <HtmlHeader title="Tổng hợp mẫu CV xin việc chuẩn, độc đáo - Youth+" />
+      <HtmlHeader title="Tổng hợp mẫu CV xin việc chuẩn, độc đáo - Eztek" />
       <Auth>
         <Initialization />
       </Auth>

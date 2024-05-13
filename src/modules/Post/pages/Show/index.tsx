@@ -226,7 +226,7 @@ const Show = ({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Cùng Youth+ thấu hiểu bản thân tại đây
+                  Cùng Eztek thấu hiểu bản thân tại đây
                 </a>
               </div>
 

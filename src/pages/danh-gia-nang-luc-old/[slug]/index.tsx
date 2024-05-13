@@ -16,7 +16,7 @@ const Page = ({ ast }) => {
           property="og:url"
           content={`${process.env.NEXT_PUBLIC_APP_URL}/danh-gia-nang-luc/${ast.slug}`}
         />
-        <meta property="og:site_name" content="Youth+" />
+        <meta property="og:site_name" content="Eztek" />
         <meta property="og:image" content={ast.avatar} />
         <meta property="og:locale" content="vi_VN" />
 

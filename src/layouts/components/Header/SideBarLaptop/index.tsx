@@ -87,7 +87,7 @@ const SideBarLaptop = () => {
             <h2
               className={`${styles.ccompany_name} tw-m-0 tw-uppercase tw-text-[#22216D] tw-text-2xl md:tw-w-[117px]`}
             >
-              Youth+
+              EZTEK
             </h2>
           </div>
           <div className="d-flex tw-flex-col tw-h-full tw-pb-[100px]">
@@ -105,7 +105,7 @@ const SideBarLaptop = () => {
                         >
                           <Image
                             src={item.iconUrl}
-                            alt={`${item.name} Youth+`}
+                            alt={`${item.name} Eztek`}
                             width={32}
                             height={32}
                           />
@@ -123,7 +123,7 @@ const SideBarLaptop = () => {
             </ul>
             <div className="tw-block tw-mt-auto">
               <div className={styles.side_bar_items__footer}>
-                <p className={styles.footer__title}>Về Youth+</p>
+                <p className={styles.footer__title}>Về Eztek</p>
                 {/* about Youth */}
                 <div className={`${styles.side_bar_items} `}>
                   {sideBarAdditionItem.map((item, index) => (
@@ -138,7 +138,7 @@ const SideBarLaptop = () => {
                           <div className={''}>
                             <Image
                               src={item.iconUrl}
-                              alt={`${item.name} Youth+`}
+                              alt={`${item.name} Eztek`}
                               height={26}
                               width={26}
                             />

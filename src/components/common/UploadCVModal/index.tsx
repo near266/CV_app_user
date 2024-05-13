@@ -151,8 +151,9 @@ const UploadCVModal = ({ onClose }) => {
         created_by: 'string',
         updated_by: 'string',
         assessment_id: getDataAssessment,
+        assessment_result_id:0,
         cv_Update_Cvs: {
-          user_id: 'd34946297fb64ff9824b4d4c390ba83a',
+          user_id: '6bf6efef2f074cc59c4510a5763c9662',
           note: 'string',
           position_desire: 'string',
           salary_desire: 'string',
@@ -226,7 +227,7 @@ const UploadCVModal = ({ onClose }) => {
         </button>
 
         <p className="text-[#0F0F14] text-[20px] font-bold p-[20px]">
-          Tải hồ sơ của bạn lên YOUTH+
+          Tải hồ sơ của bạn lên Eztek
         </p>
 
         <div
@@ -717,7 +718,7 @@ const UploadCVModal = ({ onClose }) => {
               >
                 {listImgEdit.length > 0 ? (
                   <div className="relative w-full min-h-[52px]">
-                    <Image src={listImgEdit[0]} alt="Youth+ Doanh nghiệp" layout="fill" />
+                    <Image src={listImgEdit[0]} alt="Eztek Doanh nghiệp" layout="fill" />
                   </div>
                 ) : (
                   <div className="ant-upload-drag-icon flex justify-center">
@@ -725,7 +726,7 @@ const UploadCVModal = ({ onClose }) => {
                       src={SrcIcons.file_plus}
                       width={42}
                       height={52}
-                      alt="Youth+ Doanh nghiệp"
+                      alt="Eztek Doanh nghiệp"
                     />
                   </div>
                 )}

@@ -3,3 +3,6 @@ declare module '@ckeditor/ckeditor5-build-classic' {
 
   export = ClassicEditorBuild;
 }
+
+
+import { window, document } from 'browser-monads';

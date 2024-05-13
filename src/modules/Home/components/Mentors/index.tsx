@@ -86,21 +86,7 @@ const Mentors = () => {
                 indicator: styles.indicator,
                 flexContainer: styles.tabs__flexContainer,
               }}
-            >
-              <Tab
-                label="Mentors "
-                classes={{ selected: styles.tabs__selected }}
-                color="white"
-                className={`${styles.tabs} `}
-              />
-              {/* &nbsp; &nbsp; */}
-              <Tab
-                label=" Khóa học"
-                classes={{ selected: styles.tabs__selected }}
-                color="white"
-                className={`${styles.tabs} `}
-              />
-            </Tabs>
+            ></Tabs>
           </Box>
           <TabPanel value={value} index={0}>
             <CutTomCarousel scrollWidth={scrollWidth} scrollRef={scrollRef}>

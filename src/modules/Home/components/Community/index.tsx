@@ -13,7 +13,7 @@ const Community = (props) => {
                   <img
                     className={styles.logoBox__logo}
                     src="/images/homepage/logo.png"
-                    alt="Youth+"
+                    alt="Eztek"
                   />
                 </div>
                 <div className={styles.logoBox}>
@@ -29,14 +29,14 @@ const Community = (props) => {
                   <img
                     className={styles.logoBox__logo}
                     src="/images/homepage/youth-academy.png"
-                    alt="Youth+ Academy"
+                    alt="Eztek Academy"
                   />
                 </div>
                 <div className={styles.logoBox}>
                   <img
                     className={styles.logoBox__logo}
                     src="/images/homepage/youth-mentor.png"
-                    alt="Youth+ Mentor"
+                    alt="Eztek Mentor"
                   />
                 </div>
               </div>

@@ -371,7 +371,7 @@ export const SuccessfulOrder = ({ assessments, posts, isFetchingPosts }) => {
           <Col className={`${styles['letterTitle']}`}>Cám ơn bạn đã tin tưởng!</Col>
           <Col className={`${styles['letterContent']}`}>
             Chúng tôi sẽ gửi thông báo qua email{' '}
-            <span className={`${styles['email']}`}>{me.email}</span> và nền tảng Youth+
+            <span className={`${styles['email']}`}>{me.email}</span> và nền tảng Eztek
             khi thanh toán được xác nhận. Vui lòng kiểm tra hộp thư và thông báo thường
             xuyên
           </Col>

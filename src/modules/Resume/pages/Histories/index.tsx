@@ -173,7 +173,7 @@ const History = () => {
               </div>
               <div className={styles.head}>
                 <div className={styles.head__title}>
-                  <h2>Hiển thị thông tin các sản phẩm bạn đã thanh toán tại Youth+</h2>
+                  <h2>Hiển thị thông tin các sản phẩm bạn đã thanh toán tại Eztek</h2>
                 </div>
               </div>
               <div className={styles.cvs}>

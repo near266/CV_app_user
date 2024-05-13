@@ -26,7 +26,7 @@ const Introduction = (props) => {
               className={`${styles.title} tw-flex-initial lg:!tw-text-[36px] 
               !tw-text-[35px] sm:tw-text-[30px] tw-text-2xl tw-text-left md:!tw-leading-[57px] tw-leading-[3.2rem]`}
             >
-              YOUTH+ <br />
+              Eztek <br />
               Nền tảng định hướng
               <br /> và kết nối việc làm cho giới trẻ
             </div>
@@ -52,7 +52,7 @@ const Introduction = (props) => {
             <Image
               src="/images/homepage/youth-hero-desktop.png"
               className="tw-max-h-full !tw-w-full tw-max-w-full"
-              alt="Youth+"
+              alt="Eztek"
               layout="fill"
               objectFit="contain"
               priority

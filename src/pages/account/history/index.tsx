@@ -4,7 +4,7 @@ import History from '@/modules/Resume/pages/Histories';
 const Page = () => {
   return (
     <>
-      <HtmlHeader title="Lịch Sử Giao Dịch - Youth+" />
+      <HtmlHeader title="Lịch Sử Giao Dịch - Eztek" />
       <History />
     </>
   );

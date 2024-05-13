@@ -168,7 +168,7 @@ const SideBarMobie = (props) => {
                           className="tw-not-italic tw-font-LexendDeca
                     tw-uppercase tw-font-semibold tw-text-base tw-leading-6 tw-text-[#22216D] tw-mb-0 tw-ml-1 d-lg-block"
                         >
-                          Youth+
+                          Eztek
                         </h2>
                       </div>
                     </a>
@@ -231,7 +231,7 @@ const SideBarMobie = (props) => {
             </div>
             <div className="tw-block">
               <div className={styles.side_bar_items__footer}>
-                <p className={styles.side_bar_items__footer__title}>Về Youth+</p>
+                <p className={styles.side_bar_items__footer__title}>Về Eztek</p>
                 {/* about Youth */}
                 <div className={`${styles.side_bar_items} `}>
                   {sideBarAdditionItem.map((item) => (
@@ -243,7 +243,7 @@ const SideBarMobie = (props) => {
                           >
                             <img
                               src={item.iconUrl}
-                              alt={`${item.name} Youth+`}
+                              alt={`${item.name} Eztek`}
                               height={defaultSize}
                               width={defaultSize}
                             />

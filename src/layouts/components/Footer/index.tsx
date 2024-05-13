@@ -11,7 +11,7 @@ const Footer = () => {
                 className="tw-h-9 md:!tw-h-[80px]"
               />
               <div className="tw-text-[#22216D]  tw-text-[30px] tw-w-[164px] tw-font-bold">
-                YOUTH+
+                Eztek
               </div>
             </div>
             <div className="description">
@@ -110,7 +110,7 @@ const Footer = () => {
         <div className="row infor-company">
           <div className="col-lg-12">
             <div className="copyright">
-              <p>© 2020 Youth+. All rights reserved.</p>
+              <p>© 2020 Eztek. All rights reserved.</p>
             </div>
           </div>
         </div>

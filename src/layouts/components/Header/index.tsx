@@ -32,7 +32,8 @@ const Header = () => {
   const auth = useSelector((state: IRootState) => state.auth);
   const headerRef = useRef(null);
   const handleLogin = () => {
-    Common.redirectToAuthenticate();
+    window.location.href = '/Login';
+    // Common.redirectToAuthenticate();
   };
   const toogleSidebar = () => {
     const expandedClassName = 'expanded';
@@ -93,7 +94,7 @@ const Header = () => {
                     />
                   </div>
                   <h2 className="company-name d-flex tw-uppercase tw-text-base tw-text-[#22216D] md:tw-w-[117px]">
-                    Youth+
+                    Eztek
                   </h2>
                 </div>
               </a>

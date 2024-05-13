@@ -7,7 +7,7 @@ import { testService } from '@/modules/TestAssessment/shared/testAssessmentServi
 const TestAssessment = ({ assessments }) => {
   return (
     <>
-      <HtmlHeader title={'Tất cả đánh giá - Youth+'} />
+      <HtmlHeader title={'Tất cả đánh giá - Eztek'} />
       <AssessmentView assessments={assessments} />
     </>
   );

@@ -8,10 +8,11 @@ export function getAccessTokenFromServerSide(cookies) {
 }
 
 export function redirectToAuthenticate() {
-  const redirectUrl = `${
-    process.env.NEXT_PUBLIC_AUTH_URL
-  }/login?redirect=${encodeURIComponent(window.location.href)}`;
-  window.location.href = redirectUrl;
+  // const redirectUrl = `${
+  //   process.env.NEXT_PUBLIC_AUTH_URL
+  // }/login?redirect=${encodeURIComponent(window.location.href)}`;
+  // window.location.href = redirectUrl;
+  window.location.href = '/Login';
 }
 export function redirectToSignUp() {
   const redirectUrl = `${

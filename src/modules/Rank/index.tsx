@@ -77,7 +77,7 @@ const Rank = () => {
               <h3 className={styles.info__title}>Bảng xếp hạng là gì?</h3>
               <p>
                 Bảng xếp hạng nhằm thể hiện, vinh danh các cá nhân có điểm số xuất sắc
-                đóng góp cho Youth+ .
+                đóng góp cho Eztek .
               </p>
               <p>
                 Points có thể được nhận bằng việc đăng bài, tham gia tương tác trên
