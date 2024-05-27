@@ -6,9 +6,22 @@ import { CustomDropdown } from '@/components';
 import { asyncLogoutAuth, IRootState } from '@/store';
 import { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
+import axios from 'axios';
 
 const UserAvatar = () => {
   const me = useSelector((state: IRootState) => state.auth.me);
+  const { loading, data, succeeded } = useSelector((state: any) => state.login);
+  const [UserDefault, SetUser] = useState('');
+  const getUser = async () => {
+    const res = await axios.get(
+      `http://localhost:8080/api/UserInfo/auth/me?id=${data.id}`
+    );
+    console.log(res.data);
+    SetUser(res.data.avatar);
+  };
+  useEffect(() => {
+    getUser();
+  }, []);
   const dispatch = useDispatch();
 
   const logout = () => {
@@ -20,13 +33,13 @@ const UserAvatar = () => {
       dropdownMenu={
         <div className={styles.menu}>
           <div className={styles.currentUser}>
-            <div className={styles.currentUser__name}>{me.name}</div>
-            <div className="username">{`@${me.username}`}</div>
+            <div className={styles.currentUser__name}>{data.userName}</div>
+            <div className="username">{`@${data.userName}`}</div>
           </div>
           <div className={styles.divider} />
           <ul className={styles.expandMenu}>
             <li>
-              <Link href={`/profile/${me.username}`}>
+              <Link href={`/profile/${data.id}`}>
                 <a className={styles.expandMenu__item}>
                   <i className="fa-solid fa-user" />
                   Trang cá nhân
@@ -41,38 +54,7 @@ const UserAvatar = () => {
                 </a>
               </Link>
             </li>
-            <li>
-              <Link href="/cv-management">
-                <a className={styles.expandMenu__item}>
-                  <i className="fas fa-book" />
-                  Quản lý CV
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/explore">
-                <a className={styles.expandMenu__item}>
-                  <i className="fas fa-rocket" />
-                  Khám phá
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/account/history">
-                <a className={styles.expandMenu__item}>
-                  <i className="fa fa-shopping-cart" />
-                  Lịch sử đơn hàng
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/ranking">
-                <a className={styles.expandMenu__item}>
-                  <i className="fa fa-trophy" />
-                  Bảng xếp hạng
-                </a>
-              </Link>
-            </li>
+
             <div className={styles.divider} />
             <li>
               {/* TODOKOGAP: Xem co che dang xuat khac hay hon k */}
@@ -86,7 +68,7 @@ const UserAvatar = () => {
       }
     >
       <div className={cx(styles.userHeader, 'menu-styled')}>
-        <img src={me.avatar || '/images/avatar/default.png'} alt={me.name} />
+        <img src={UserDefault || '/images/avatar/default.png'} alt={me.name} />
       </div>
     </CustomDropdown>
   );

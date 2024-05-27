@@ -31,7 +31,7 @@ export interface IPostJob {
   reason_of_view: string;
   total_view: number;
   total_cv: number;
-  created_at: number;
+  created_date: number;
   updated_at: number;
   deleted_at: any;
   enterprise: Enterprise;

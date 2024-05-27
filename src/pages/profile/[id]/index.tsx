@@ -27,20 +27,18 @@ const Page = ({ personal }) => {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const paramsString = new URLSearchParams({
-    fields: 'id,name,address,information,avatar,username,identity_verified',
+    fields: 'id,name,address,information,avatar,username,',
   }).toString();
 
-  const res = await fetchSSR.callAPI(ctx, `users/${ctx.params.username}?${paramsString}`);
-
-  if (res?.code !== 'SUCCESS') {
-    return {
-      notFound: true,
-    };
-  }
-
+  // const res = await fetchSSR.callAPI(
+  //   ctx,
+  //   `http://localhost:8080/api/UserInfo/auth/me?id=${paramsString}`
+  // );
+  // console.log(res);
+  const { id: personal } = ctx.query;
   return {
     props: {
-      personal: res.payload,
+      personal,
     },
   };
 };

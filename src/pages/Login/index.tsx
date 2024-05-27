@@ -4,48 +4,49 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Checkbox, Form, message } from 'antd';
 import { TextBoxWithLabel } from '@/components';
+import { appLibrary } from '@/shared';
+import { FORM_DATA_FIELD } from '@/shared/enums/enums';
+import userLogin from '@/shared/services/userLogin';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 
 const Login = () => {
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const { loading, data, succeeded } = useSelector((state: any) => state.login);
 
-  const LoginModule = () => {
-    // const [form] = Form.useForm();
-    // const handleLogin = async () => {
-    //   const { email, password, remember_me } = form.getFieldsValue();
-    //   if (!email || !password) {
-    //     message.warning('Vui lòng nhập đầy đủ thông tin');
-    //     return;
-    //   }
-    //   onLogin(email, password, remember_me);
+  const handleLogin = async () => {
+    const { email, password, remember_me } = form.getFieldsValue();
+    if (!email || !password) {
+      message.warning('Vui lòng nhập đầy đủ thông tin');
+      return;
+    }
+
+    onLogin(email, password, remember_me);
   };
+  const router = useRouter();
 
-  const onLogin = async () =>
-    //   email: FORM_DATA_FIELD.email,
-    //   password: FORM_DATA_FIELD.password,
-    //   remember_me: boolean
-    {
-      //   try {
-      //     appLibrary.showloading();
-      //     const { code, payload }: { code: SV_RES_STATUS_CODE; payload: LoginResponse } =
-      //       await loginInstance.login(email, password, remember_me);
-      //     if (code === SV_RES_STATUS_CODE.success) {
-      //       message.success('Đăng nhập thành công');
-      //       message.success('Đang chuyển hướng đến trang quản trị');
-      //       setCookie(TokenPair.access_token, payload.access_token, {
-      //         expires: new Date(Date.now() + 1000 * 60 * 60 * 12),
-      //         secure: payload.secure,
-      //       });
-      //       setCookie(TokenPair.refresh_token, payload.refresh_token, {
-      //         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
-      //         secure: payload.secure,
-      //       });
-      //       redirectToAdmin();
-      //     }
-      //   } catch (error) {
-      //     appLibrary.hideloading();
-      //     message.error(error?.response?.data?.error ?? 'Đăng nhập thất bại');
-      //   }
-    };
+  const onLogin = async (
+    email: FORM_DATA_FIELD.email,
+    password: FORM_DATA_FIELD.password,
+    remember_me: boolean
+  ) => {
+    try {
+      appLibrary.showloading();
+      console.log(form.getFieldsValue());
+      const thunkDispatch: ThunkDispatch<any, any, AnyAction> = dispatch;
+
+      thunkDispatch(userLogin({ email, password }));
+
+      router.push('/');
+      appLibrary.hideloading();
+    } catch (error) {
+      appLibrary.hideloading();
+      message.error(error?.response?.data?.error ?? 'Đăng nhập thất bại');
+    }
+  };
 
   const onAllStepComplete = () => {};
   return (
@@ -139,7 +140,7 @@ const Login = () => {
             </div>
           </Form>
           <div className="steps-action flex m-auto mt-0">
-            <button>Đăng nhập</button>
+            <button onClick={() => handleLogin()}>Đăng nhập</button>
           </div>
           <div className="m-auto text-center">
             <p className="text-[#696974] max-w-[467px] leading-[26px] font-[16px] mt-4">

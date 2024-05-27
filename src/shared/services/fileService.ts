@@ -4,15 +4,15 @@ import { AxiosResponse } from 'axios';
 import { UploadFolderType, IServerResponse } from '@/interfaces';
 
 class FileService {
-  async upload(uploadFolder: UploadFolderType, formData: FormData) {
+  async upload(uploadFolder: any, formData: FormData) {
     const config = {
       headers: {
         'Content-type': 'multipart/form-data',
       },
     };
 
-    const res: AxiosResponse<IServerResponse> = await httpClient.post(
-      `save-image/${uploadFolder}`,
+    const res = await httpClient.post(
+      `http://localhost:8080/api/Upload/uploadV2`,
       formData,
       config
     );

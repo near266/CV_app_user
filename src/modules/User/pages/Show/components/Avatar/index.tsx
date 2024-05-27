@@ -1,13 +1,16 @@
 import { BaseSyntheticEvent, useRef, useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { CircularProgress } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import cx from 'classnames';
 
 import { setUserFieldValue } from '@/store';
 import { userService } from '../../../../shared';
 import UserContext from '../../contexts/userContext';
 import styles from './styles.module.scss';
+import axios from 'axios';
+import { UserInfo } from '../../../Setting/tabs';
+import { registerInstance } from '@/shared';
 
 const Avatar = ({ avatarUrl, userName }) => {
   const dispatch = useDispatch();
@@ -16,6 +19,7 @@ const Avatar = ({ avatarUrl, userName }) => {
 
   const [processing, setProcessing] = useState<boolean>(false);
   const [internalAvatar, setInternalAvatar] = useState<string>('');
+  const { loading, data, succeeded } = useSelector((state: any) => state.login);
 
   useEffect(() => {
     setInternalAvatar(avatarUrl);
@@ -37,15 +41,38 @@ const Avatar = ({ avatarUrl, userName }) => {
 
       // create form data
       const formData = new FormData();
-      formData.append('image', files['0']);
+      formData.append('file', files['0']);
 
       userService
         .changeAvatar(formData)
         .then((res) => {
-          if (res?.code === 'SUCCESS') {
-            setInternalAvatar(res.payload.url);
-            dispatch(setUserFieldValue({ key: 'avatar', value: res.payload.url }));
-          }
+          console.log(res);
+          const codeDown = axios.get(res.getInfoUri).then((url) => {
+            const totl = res.stringConnect + url.data.downloadTokens;
+            console.log(totl);
+            setInternalAvatar(totl);
+            const user = registerInstance.getuserInfo(data.id).then((userDetail) => {
+              console.log(userDetail);
+              const UserInfo = {
+                id: userDetail.id,
+                avatar: totl,
+              };
+              const payload = {
+                UserInfo,
+              };
+              const update = axios.put(
+                `http://localhost:8080/api/UserInfo/UserInfo/Update`,
+                payload
+              );
+              console.log(update);
+            });
+            dispatch(setUserFieldValue({ key: 'avatar', value: totl }));
+          });
+
+          // if (res) {
+          //   setInternalAvatar(res.payload.url);
+          //   dispatch(setUserFieldValue({ key: 'avatar', value: res.payload.url }));
+          // }
         })
         .finally(() => setProcessing(false));
     }

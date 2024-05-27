@@ -1,5 +1,6 @@
 export class ChangePasswordForm {
+  userName: string = '';
   password: string = '';
-  new_password: string = '';
-  new_password_confirmation: string = '';
+  oldPass: string = '';
+  confirmPassword: string = '';
 }

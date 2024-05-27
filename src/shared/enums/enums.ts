@@ -7,6 +7,17 @@ export enum SV_RES_STATUS_CODE {
   success = 'SUCCESS',
   error = 'ERROR',
 }
+export enum GENDER_CODE {
+  male = 1,
+  female = 2,
+  none = 3,
+}
+export enum GET_OTP_TYPE {
+  SIGNUP = 1,
+  CHANGE_ENTERPRISE_PHONE = 2,
+  CHANGE_REPRESENT_PHONE = 3,
+}
+
 export enum FORM_DATA_FIELD {
   last_name = 'last_name',
   first_name = 'first_name',

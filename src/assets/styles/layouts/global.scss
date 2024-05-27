@@ -1,6 +1,8 @@
 // @import '@globalStyles/common/mixins';
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+
+
 html {
   scroll-behavior: smooth;
 }
@@ -79,6 +81,7 @@ body {
   line-height: 57px !important;
   letter-spacing: -0.005em !important;
   margin-top: 15px !important;
+
   @include mobile {
     font-size: 1.8rem !important;
   }

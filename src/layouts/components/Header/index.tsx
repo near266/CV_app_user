@@ -30,6 +30,9 @@ const lgBootsrapBreakPoint = 992;
 const Header = () => {
   const router = useRouter();
   const auth = useSelector((state: IRootState) => state.auth);
+  const [checkAuth, setcheckAuth] = useState();
+  const { isFetch, loading, data, succeeded } = useSelector((state: any) => state.login);
+
   const headerRef = useRef(null);
   const handleLogin = () => {
     window.location.href = '/Login';
@@ -113,24 +116,15 @@ const Header = () => {
                   priority
                 />
               </a>
-
-              {router.pathname === '/' && (
-                <Button
-                  className="nav-button d-none d-xl-flex !px-2 !tw-py-2 !tw-rounded-[10px] hover:!tw-bg-transparent !tw-border-none hover:!tw-text-[#403ECC] !tw-underline "
-                  variant="outlined"
-                  href="https://job.youth.com.vn/enterprise"
-                >
-                  Doanh nghiệp
-                </Button>
-              )}
             </div>
             <nav className="user-infor">
               <div className="tw-min-w-[90px] !tw-h-full d-flex tw-justify-center tw-items-center">
-                <RenderWithCondition show={auth.isFetched}>
-                  {auth.isAuthenticated ? (
+                <RenderWithCondition show={isFetch}>
+                  {succeeded ? (
                     <ul className="user-logged">
                       <li className="toolitem">
-                        <NotificationButton />
+                        {/* sadfsa
+                        <NotificationButton /> */}
                       </li>
                       <li className="toolitem">
                         <UserAvatar />

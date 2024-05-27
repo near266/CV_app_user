@@ -5,17 +5,19 @@ import { Common } from '@/shared';
 const Auth = ({ children }) => {
   const isAuthenticated = useSelector((state: IRootState) => state.auth.isAuthenticated);
   const isFetched = useSelector((state: IRootState) => state.auth.isFetched);
+  const { loading, data, succeeded } = useSelector((state: any) => state.login);
+
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!succeeded) {
       Common.redirectToAuthenticate();
     }
 
     return () => {};
-  }, [isAuthenticated]);
+  }, [succeeded]);
 
-  const View = isFetched ? children : <span aria-label="Loading ..."></span>;
+  const View = succeeded ? children : <span aria-label="Loading ..."></span>;
 
-  return isAuthenticated ? View : null;
+  return succeeded ? View : null;
 };
 
 export default Auth;

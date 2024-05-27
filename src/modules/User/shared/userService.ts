@@ -10,7 +10,7 @@ class UserService {
     };
 
     const res: AxiosResponse = await httpClient.post(
-      'user-change-avatar',
+      '/api/Upload/uploadV2',
       formData,
       config
     );

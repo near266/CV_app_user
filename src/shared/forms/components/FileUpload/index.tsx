@@ -6,6 +6,7 @@ import { fileService } from '@/shared';
 import { UploadFolderType } from '@/interfaces';
 import FormContext from '../../contexts/FormContext';
 import styles from './styles.module.scss';
+import axios from 'axios';
 
 interface IProps {
   uploadFolder: UploadFolderType;
@@ -49,15 +50,17 @@ const FileUpload: FC<IProps> = ({
 
       // create form data
       const formData = new FormData();
-      formData.append('image', files['0']);
+      formData.append('file', files['0']);
 
       fileService
         .upload(uploadFolder, formData)
         .then((res) => {
-          if (res?.code === 'SUCCESS') {
+          const upload = axios.get(res.getInfoUri).then((up) => {
+            const url = res.stringConnect + up.data.downloadTokens;
+            console.log(url);
             setFilePlaceholderState(files[0].name);
-            form.setFieldValue(name, res.payload.url);
-          }
+            form.setFieldValue(name, url);
+          });
         })
         .finally(() => setProcessing(false));
     } else {

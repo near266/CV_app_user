@@ -19,16 +19,16 @@ const TabSwitch = () => {
 
   useEffect(() => {
     setTabs([
-      {
-        id: 'posts',
-        name: 'Bài viết',
-        visibility: true,
-      },
-      {
-        id: 'waitingApprove',
-        name: 'Chờ duyệt',
-        visibility: showForCurrentUser,
-      },
+      // {
+      //   id: 'posts',
+      //   name: 'Bài viết',
+      //   visibility: true,
+      // },
+      // {
+      //   id: 'waitingApprove',
+      //   name: 'Chờ duyệt',
+      //   visibility: showForCurrentUser,
+      // },
       {
         id: 'saved',
         name: 'Đã lưu',

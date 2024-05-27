@@ -1,190 +1,132 @@
-import { Component } from 'react';
+import { FullContentLayout } from '@/shared';
+import React, { useEffect, useState } from 'react';
+import { recruitmentsAPI } from '@/modules/Home/shared/api2';
+import { SearchPost } from '@/modules/Home/shared/AllApiService';
 import Link from 'next/link';
 import cx from 'classnames';
-import PropTypes from 'prop-types';
-import Router, { withRouter } from 'next/router';
-import { connect } from 'react-redux';
-import { Paper, Pagination } from '@mui/material';
-import { ceil } from 'lodash-es';
-
-import { IRootState } from '@/store';
-import { Post, PopularPost } from '@/components';
-import { FullContentLayout } from '@/shared';
-import { PostSkeleton } from '@/skeletons';
-import { IPost } from '@/interfaces';
-import { postService } from '../../shared';
 import styles from './styles.module.scss';
+
+import Pagination from '@mui/material/Pagination';
+import Paper from '@mui/material/Paper';
 import SearchBar from '@/layouts/components/SearchBar';
+import Image from 'next/image';
+import PopularPost from '@/components/common/PopularPost';
+import moment from 'moment';
+import style from './styles.module.scss';
+const Index = () => {
+  // const payload: SearchPost = {
+  //   enterprise_id: null,
+  //   page: 1,
+  //   pageSize: 10,
+  // };
+  const [payload, setPayload] = useState({
+    fields_id: null,
+    city: null,
+    district: null,
+    page: 1,
+    pageSize: 10,
+  });
+  const [posts, setPosts] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
-interface IState {
-  posts: IPost[];
-  isLoading: boolean;
-  activePage: number;
-  pageCount: number;
-  pageRangeDisplayed: number;
-}
-
-export class List extends Component<any, IState> {
-  static propTypes = {
-    apiUrl: PropTypes.string.isRequired,
-    isAuthenticated: PropTypes.bool,
-  };
-
-  constructor(props) {
-    super(props);
-
-    // responsive paginate
-    let pageRangeDisplayed = 8;
-    if (screen.width < 600) {
-      pageRangeDisplayed = 3;
+  const getPost = async () => {
+    try {
+      const res = await recruitmentsAPI.getAllPostForUser(payload);
+      console.log(res);
+      setPosts(res.data);
+    } catch (error) {
+      console.error('Failed to fetch posts', error);
+    } finally {
+      setLoading(false);
     }
-
-    this.state = {
-      posts: [],
-      isLoading: true,
-      activePage: 1,
-      pageCount: 0,
-      pageRangeDisplayed: pageRangeDisplayed,
-    };
-  }
-
-  componentDidMount() {
-    const page = this.props.router.query.page || 1;
-    this.getPostData(page);
-  }
-
-  componentWillUnmount() {
-    // Router.events.off('routeChangeStart', this.changePage);
-  }
-
-  changePage = (url) => {
-    // this.getPostData(pageNumber);
   };
 
-  handlePageChange = (e, pageNumber: number) => {
-    if (pageNumber === this.state.activePage) return false;
-    const pathname = this.props.rUri || '/posts';
-    Router.push({ pathname: pathname, query: { page: pageNumber } });
+  useEffect(() => {
+    getPost();
+  }, []);
 
-    this.getPostData(pageNumber);
-  };
-
-  async getPostData(page) {
-    const res = await postService.getList(this.props.apiUrl, page).finally(() => {
-      this.setState({ isLoading: false });
-    });
-
-    const posts = res.payload;
-    posts.data.map((post) => {
-      post.liked = post.liked.length > 0;
-    });
-    this.setState({
-      posts: posts.data,
-      activePage: posts.current_page,
-      pageCount: ceil(posts.total / posts.per_page),
-    });
-    window.scrollTo(0, 0);
-  }
-
-  render() {
-    const Posts = this.state.posts.map((item, index) => (
-      <Post key={index} post={item} isAuthenticated={this.props.isAuthenticated} />
-    ));
-
-    const Loading = Array(2)
-      .fill(0)
-      .map((item, index) => (
-        <Paper key={index} className={styles.feed}>
-          <PostSkeleton />
-        </Paper>
-      ));
-
-    return (
-      <FullContentLayout className={styles.page}>
-        <div className="container">
-          <Link href="/posts/create" className="">
-            <a className="btn btn-common write-post tw-mb-5">
-              <i className="fa fa-pencil-alt" aria-hidden="true"></i>
-              <span className="d-none d-md-inline">Viết bài</span>
-            </a>
-          </Link>
-          <div className="tw-mb-5 tw-flex tw-gap-4 ">
-            <SearchBar
-              customStyle={{
-                searchBar: 'tw-w-[44%] tw-absolute tw-z-10 tw-translate-x-[10px]',
-                searchBox__input: 'tw-h-[30px] -tw-translate-x-[10px]',
-              }}
-            />
-          </div>
-          <div className="row tw-mt-9 ">
-            <div className={cx('col-md-8', styles.listPost)}>
-              {this.state.isLoading ? (
-                Loading
-              ) : Posts.length > 0 ? (
-                Posts
-              ) : (
-                <div className={styles.noPosts}>
-                  <p className={styles.noPosts__title}>Không có bài viết nào</p>
-                  <Link href="/explore">
-                    <a>
-                      <button
-                        type="button"
-                        className={cx(styles.noPosts__generalButton, 'btn btn-common')}
-                      >
-                        Theo dõi topic
-                      </button>
-                    </a>
-                  </Link>
-                  <Link href="/posts">
-                    <a>
-                      <button
-                        type="button"
-                        className={cx(styles.noPosts__generalButton, 'btn btn-common')}
-                      >
-                        Tất cả
-                      </button>
-                    </a>
-                  </Link>
+  return (
+    <FullContentLayout className={style.page}>
+      <div className="container">
+        <div className="tw-mb-5 tw-flex tw-gap-4">
+          <SearchBar
+            customStyle={{
+              searchBar: 'tw-w-[44%] tw-absolute tw-z-10 tw-translate-x-[10px]',
+              searchBox__input: 'tw-h-[30px] -tw-translate-x-[10px]',
+            }}
+          />
+        </div>
+        <div className="row tw-mt-9">
+          <div className={cx('col-md-8', style.listPost)}>
+            {isLoading ? (
+              <p>Loading....</p>
+            ) : posts.length > 0 ? (
+              posts.map((post) => (
+                <div key={post.job_post_id} className={style.postItem}>
+                  <Paper className="tw-p-2 tw-flex tw-justify-between tw-mt-4">
+                    <div className="mr-6 ">
+                      <img className="object-fill h-48 w-96" src={post.image_url}></img>
+                      <p>Mô tả</p>
+                      {post.overView}
+                    </div>
+                    <div className={style.postItem}>
+                      <div className={style.postHeader}>
+                        <div>
+                          <h3>{post.title}</h3>
+                          <span>Lĩnh vực : {post.filedName}</span>
+                          <p>Ngày tạo: {moment(post.createPost_at).format('DD/MM/YY')}</p>
+                        </div>
+                      </div>
+                      <span>
+                        Nơi làm việc : {post.city} <p></p> {post.district}
+                      </span>
+                      <p>Tạo bởi {post.enterpriseName}</p>
+                      <Link href={`/Post?id=${post.job_post_id}`}>
+                        <p>Liên hệ: {post.contact_email}</p>
+                      </Link>
+                      <p>SDT: {post.contact_phone}</p>
+                    </div>
+                  </Paper>
                 </div>
-              )}
-
-              {Posts.length > 0 && (
-                <Paper className="tw-p-2 tw-flex tw-justify-center tw-mt-4">
-                  <Pagination
-                    count={this.state.pageCount}
-                    page={this.state.activePage}
-                    shape="rounded"
-                    onChange={this.handlePageChange}
-                  />
-                </Paper>
-              )}
-            </div>
-            <div className="col-md-4">
-              {/* <div className={styles.banner}>
-                <a
-                  href="https://bit.ly/membershipfromweb"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src="/images/membership/banner.gif" alt="Membership" />
-                </a>
-              </div> */}
-              {/* <div style={{ marginBottom: '10px' }}>
-                <AdSense adFormat="rectangle" adSlot="6848968161" />
-              </div> */}
-              <PopularPost />
-            </div>
+              ))
+            ) : (
+              <div className={style.noPosts}>
+                <p className={style.noPosts__title}>Không có bài viết nào</p>
+                <Link href="/explore">
+                  <a>
+                    <button
+                      type="button"
+                      className={cx(style.noPosts__generalButton, 'btn btn-common')}
+                    >
+                      Theo dõi topic
+                    </button>
+                  </a>
+                </Link>
+                <Link href="/posts">
+                  <a>
+                    <button
+                      type="button"
+                      className={cx(style.noPosts__generalButton, 'btn btn-common')}
+                    >
+                      Tất cả
+                    </button>
+                  </a>
+                </Link>
+              </div>
+            )}
+            {posts.length > 0 && (
+              <Paper className="tw-p-2 tw-flex tw-justify-center tw-mt-4">
+                <Pagination count={5} page={1} shape="rounded" />
+              </Paper>
+            )}
+          </div>
+          <div className="col-md-4">
+            <PopularPost />
           </div>
         </div>
-      </FullContentLayout>
-    );
-  }
-}
-
-const mapStateToProps = (state: IRootState) => {
-  return {
-    isAuthenticated: state.auth.isAuthenticated,
-  };
+      </div>
+    </FullContentLayout>
+  );
 };
 
-export default connect(mapStateToProps)(withRouter(List));
+export default Index;

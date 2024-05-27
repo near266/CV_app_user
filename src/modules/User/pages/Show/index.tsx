@@ -12,22 +12,23 @@ const TabSwitch = dynamic(() => import('./components/TabSwitch'), {
 import styles from './styles.module.scss';
 
 const Show = ({ personal }) => {
-  const auth = useSelector((state: IRootState) => state.auth);
+  const auth = useSelector((state: any) => state.login);
 
-  const [showForAnotherUser, setShowForAnotherUser] = useState(false);
-  const [showForCurrentUser, setShowForCurrentUser] = useState(false);
+  const [showForAnotherUser, setShowForAnotherUser] = useState(true);
+  const [showForCurrentUser, setShowForCurrentUser] = useState(true);
 
   useEffect(() => {
-    const checkShowForAnotherUser = auth.isAuthenticated
-      ? auth.me.username !== personal.username
-      : true;
+    console.log(personal);
+    // const checkShowForAnotherUser = auth.isAuthenticated
+    //   ? auth.me.username !== personal.username
+    //   : true;
 
-    const checkShowForCurrentUser = auth.isAuthenticated
-      ? auth.me.username === personal.username
-      : false;
+    // const checkShowForCurrentUser = auth.isAuthenticated
+    //   ? auth.me.username === personal.username
+    //   : false;
 
-    setShowForAnotherUser(checkShowForAnotherUser);
-    setShowForCurrentUser(checkShowForCurrentUser);
+    // setShowForAnotherUser(checkShowForAnotherUser);
+    // setShowForCurrentUser(checkShowForCurrentUser);
   }, [auth, personal]);
 
   return (

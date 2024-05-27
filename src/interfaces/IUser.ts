@@ -11,6 +11,8 @@ export interface IUser {
   social_id?: string;
   social_type?: string;
   telephone?: string;
+  phone?: string;
+
   created_at?: string;
   updated_at?: string;
   created_by?: any;

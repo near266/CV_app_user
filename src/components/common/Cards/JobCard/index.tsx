@@ -42,7 +42,7 @@ const JobCard: React.FC<IJobCardProps> = (props: IJobCardProps) => {
   } = props;
 
   return (
-    <Link href={`https://job.youth.com.vn/job/job-detail/${slug}/${id}`} passHref>
+    <Link href={`/Post?id=${id}`} passHref>
       <div
         key={id}
         className={cx(
@@ -58,17 +58,18 @@ const JobCard: React.FC<IJobCardProps> = (props: IJobCardProps) => {
             <div className={styles['card_header']}>
               <div className={styles['card_header__image']}>
                 {/* <Image src={imgUrl} alt={title} layout="fill" /> */}
+
                 <img
-                        src={imgUrl || '/images/homepage/youth-hero-desktop.png'}
-                        alt={title}
-                        style={{ width: '100%', height: '100%' }}
-                      />
+                  src={imgUrl || '/images/homepage/youth-hero-desktop.png'}
+                  alt={title}
+                  style={{ width: '100%', height: '100%' }}
+                />
               </div>
               <p className="tw-cursor-pointer">...</p>
             </div>
             <div className={styles['card_body']}>
               <div className={styles['card_body__title']}>
-                <Link href={`https://job.youth.com.vn/job/job-detail/${slug}/${id}`}>
+                <Link href={`/Post?id=${id}`}>
                   <a>{title}</a>
                 </Link>
               </div>
@@ -78,13 +79,7 @@ const JobCard: React.FC<IJobCardProps> = (props: IJobCardProps) => {
                     {
                       <TruncateLines
                         lines={3}
-                        ellipsis={
-                          <Link
-                            href={`https://job.youth.com.vn/job/job-detail/${slug}/${id}`}
-                          >
-                            ...Đọc thêm
-                          </Link>
-                        }
+                        ellipsis={<Link href={`/Post?id=${id}`}>...Đọc thêm</Link>}
                       >
                         {description}
                       </TruncateLines>

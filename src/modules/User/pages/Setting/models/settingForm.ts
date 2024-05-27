@@ -6,7 +6,7 @@ export class SettingForm {
       this.name = item.name;
       this.address = item.address;
       this.email = item.email;
-      this.telephone = item.telephone;
+      this.phone = item.phone;
       this.information = item.information;
       this.avatar = item.avatar;
     }
@@ -14,8 +14,8 @@ export class SettingForm {
 
   name: string = '';
   address: string = '';
-  email: string = '';
-  telephone: string = null;
-  information: string = '';
+  email: any;
+  phone: any;
+  information: any = '';
   avatar: string = null;
 }

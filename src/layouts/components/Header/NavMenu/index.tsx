@@ -19,39 +19,39 @@ const menuItems = [
     yieldName: 'sidebar_post',
   },
   {
-    name: 'Đánh giá',
+    name: 'Tạo CV',
     hideOnMobile: true,
-    url: '/danh-gia-nang-luc',
+    url: 'https://15a8dbdf.resume-app-create.pages.dev/resume-builder',
     iconUrl: '/images/icons/sidebar/test-nav.svg',
     yieldName: 'sidebar_follow_post',
   },
 
-  {
-    name: 'Sự kiện',
-    hideOnMobile: true,
-    url: '#',
-    iconUrl: '/images/icons/sidebar/event.svg',
-    yieldName: 'sidebar_assessment',
-    children: null,
-  },
+  // {
+  //   name: 'Sự kiện',
+  //   hideOnMobile: true,
+  //   url: '#',
+  //   iconUrl: '/images/icons/sidebar/event.svg',
+  //   yieldName: 'sidebar_assessment',
+  //   children: null,
+  // },
 
-  {
-    name: 'Việc làm',
-    hideOnMobile: true,
-    url: null,
-    actionClick: async () => {
-      const response = await httpClient.get('/token');
+  // {
+  //   name: 'Việc làm',
+  //   hideOnMobile: true,
+  //   url: null,
+  //   actionClick: async () => {
+  //     const response = await httpClient.get('/token');
 
-      if (response.data.status == 'success') {
-        window.location.href = 'https://job.youth.com.vn?token=' + response.data.token;
-      } else {
-        window.location.href = 'https://job.youth.com.vn';
-      }
-    },
-    iconUrl: '/images/icons/sidebar/job.svg',
-    yieldName: 'sidebar_assessment',
-    children: null,
-  },
+  //     if (response.data.status == 'success') {
+  //       window.location.href = 'https://job.youth.com.vn?token=' + response.data.token;
+  //     } else {
+  //       window.location.href = 'https://job.youth.com.vn';
+  //     }
+  //   },
+  //   iconUrl: '/images/icons/sidebar/job.svg',
+  //   yieldName: 'sidebar_assessment',
+  //   children: null,
+  // },
   {
     name: 'Bài viết',
     hideOnMobile: true,
@@ -92,7 +92,7 @@ const NavMenu = () => {
   const navRef = useRef(null);
 
   const activeClassName = (path) => {
-    if (path===null) {
+    if (path === null) {
       return;
     }
     const currentPath = router.pathname;
@@ -176,9 +176,9 @@ const NavMenu = () => {
               ) : (
                 <a
                   className="menu-styled tw-relative "
-                  onClick={() => {
-                    menu.actionClick();
-                  }}
+                  // onClick={() => {
+                  //   menu.actionClick();
+                  // }}
                 >
                   {menu.name}
                 </a>

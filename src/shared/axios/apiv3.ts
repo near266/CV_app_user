@@ -28,7 +28,7 @@ function rejectErrorAndClearToken(error: AxiosError) {
 const cancelTokenSource = axios.CancelToken.source();
 
 const apiEnterprise: AxiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_JOB_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL_LOCAL,
   timeout: 10000,
   headers: {
     Accept: 'application/json',

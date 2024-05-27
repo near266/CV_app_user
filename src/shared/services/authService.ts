@@ -8,13 +8,13 @@ class AuthService {
     return res.data;
   }
 
-  async updateMeInfo(params) {
-    const res: AxiosResponse = await httpClient.put('auth/update-info', params);
+  async updateMeInfo(userInfo) {
+    const res = await httpClient.put('/api/UserInfo/UserInfo/Update', { userInfo });
     return res.data;
   }
 
   async changePassword(params) {
-    const res: AxiosResponse = await httpClient.put('auth/change-password', params);
+    const res = await httpClient.post('/api/User/reset-password', params);
     return res.data;
   }
 

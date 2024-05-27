@@ -1,38 +1,38 @@
-.page {
-  background: #f0f0f0;
-  padding-top: 40px;
-  padding-bottom: 30px;
-}
+.postItem {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 16px;
 
-.feed {
-  width: 100%;
-  padding: 20px;
-  position: relative;
+  .postHeader {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 180px;
 
-  &:not(:first-child) {
-    margin-top: 13px;
+    img {
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    p {
+      margin: 0;
+      color: #888;
+    }
   }
-}
 
-.noPosts {
-  padding: 20px;
-  background-color: #fff;
-
-  &__title {
-    font-size: 20px;
-  }
-
-  &__generalButton {
-    margin-right: 15px;
-    padding: 3px 15px;
-    border-radius: 20px;
-  }
-}
-
-.banner {
   img {
-    width: 100%;
+    max-width: 100%;
   }
 
-  margin-bottom: 20px;
+  h2 {
+    margin: 16px 0 8px;
+  }
+
+  p {
+    color: #555;
+  }
 }

@@ -61,9 +61,7 @@ const AssessmentAction: React.FC<Action> = (props: Action) => {
                 onClick={() => {
                   setShowModal(true);
                 }}
-              >
-                Test ngay
-              </Button>
+              ></Button>
               <CustomModal
                 isOpen={showModal}
                 onChange={(childState) => {

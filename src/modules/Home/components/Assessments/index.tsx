@@ -306,7 +306,7 @@ const Assessments = () => {
                 </ul> */}
               </div>
               <div className="tw-max-w-[1300px] tw-max-h-[540px]  tw-p-0 tw-relative">
-                <ListCard>
+                {/* <ListCard>
                   {assessments.map((item, index) => (
                     <TestCard
                       id={item.id}
@@ -325,7 +325,7 @@ const Assessments = () => {
                       key={item.id}
                     />
                   ))}
-                </ListCard>
+                </ListCard> */}
                 <div className="-tw-translate-y-[65px]  tw-mx-auto tw-relative tw-w-full tw-h-[100px] tw-text-center">
                   <span
                     className="tw-text-center tw-text-[#403ECC] tw-text-xl tw-cursor-pointer"

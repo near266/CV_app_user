@@ -34,7 +34,7 @@ export const numberWithCommas = (x) => {
 export const convertToSimplifiedVND = (number: number): number => {
   return number / 1000000;
 };
-export const calculateDateDiff = (timestamp: number) => {
+export const calculateDateDiff = (timestamp: any) => {
   const currentDate = new Date();
   const targetDate = new Date(timestamp * 1000); // Multiply by 1000 to convert seconds to milliseconds
 

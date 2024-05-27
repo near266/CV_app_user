@@ -1,3 +1,5 @@
+import { any } from 'prop-types';
+
 export enum LICENSE_DATA_FIELD {
   birthday = 'birthday',
   fullname = 'fullname',
@@ -13,6 +15,12 @@ export enum LICENSE_DATA_FIELD {
   gender = 'gender',
 }
 
+export enum FORM_CREATE_CANDIADTE {
+  name = 'name',
+  email = 'email',
+  phone = 'phone',
+  cv_path = 'cv_path',
+}
 // Sub fields of cv_edu
 export enum CV_EDU_DATA_FIELD {
   school = 'school',

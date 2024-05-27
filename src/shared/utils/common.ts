@@ -15,10 +15,7 @@ export function redirectToAuthenticate() {
   window.location.href = '/Login';
 }
 export function redirectToSignUp() {
-  const redirectUrl = `${
-    process.env.NEXT_PUBLIC_AUTH_URL
-  }/register?redirect=${encodeURIComponent(window.location.href)}`;
-  window.location.href = redirectUrl;
+  window.location.href = '/sign-up';
 }
 
 export function downloadFileNormally(response) {

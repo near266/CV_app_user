@@ -10,9 +10,17 @@ import { IPostJob } from '@/interfaces/IPostJob';
 import { TruncateLines } from 'react-truncate-lines';
 import { calculateDateDiff, convertToSimplifiedVND } from '@/helpers';
 import { JobInfoEnum } from '@/modules/User/shared/enums';
+const payloadList = {
+  enterprise_id: null,
+  page: 1,
+  pageSize: 5,
+};
 const fetcher = async () => {
-  const data = await axios.get('https://job.youth.com.vn/api/job-posts');
-  return data.data.data.data as IPostJob[] | null;
+  const data = await axios.post(
+    'http://localhost:8080/api/Cv/job-post/search',
+    payloadList
+  );
+  return data.data.items as IPostJob[] | null;
 };
 const JobsView = (props) => {
   const { data, error } = useSWR('get-home-post-job', fetcher);
@@ -32,34 +40,11 @@ const JobsView = (props) => {
           <p className={`${styles.title} section-title `}>Việc làm</p>
         </div>
 
-        {/* <div
-        >
-          only search bar with one input
-          <div
-            className={`${styles.search_bar__input_wrap} tw-w-full md:!tw-rounded-r-none md:!tw-h-[70px]  md:!tw-border-none !tw-py-0`}
-          >
-            <div className="tw-flex tw-h-full tw-w-full tw-items-center">
-              <img src="/images/icons/jobview/search.svg" alt="" />
-              <input
-                type="text"
-                className={`${styles.search_bar__input_plaecholder} !tw-text-base tw-m-0 tw-border-none tw-outline-none`}
-                placeholder="Tìm kiếm việc làm..."
-              />
-              <SearchBar customStyle={styles} click={parentClickSearch} />
-            </div>
-          </div>
-
-
-
-        </div> */}
         <Search />
         <div className="container tw-px-0">
           <div className="col-12 tw-mt-[35px] tw-px-0 tw-flex">
             {/* special card */}
-            <Link
-              href={`https://job.youth.com.vn/job/job-detail/${data[0]?.slug}/${data[0]?.id}`}
-              passHref
-            >
+            <Link href={`/Post?id=${data[0].id}`} passHref>
               <div className="col-lg-6 d-none d-lg-block tw-pb-4 tw-cursor-pointer">
                 <div className="tw-bg-white tw-rounded-[10px] tw-h-full tw-flex tw-justify-center tw-items-center tw-flex-col tw-shadow-md tw-p-[1rem] tw-gap-[1rem]">
                   <div className="tw-flex tw-justify-between tw-items-center tw-relative tw-w-full">
@@ -72,7 +57,9 @@ const JobsView = (props) => {
                         layout="fill"
                       /> */}
                       <img
-                        src={data[0]?.image_url || '/images/homepage/youth-hero-desktop.png'}
+                        src={
+                          data[0]?.image_url || '/images/homepage/youth-hero-desktop.png'
+                        }
                         alt={data[0]?.enterprise?.name}
                         style={{ width: '100%', height: '100%' }}
                       />
@@ -82,16 +69,14 @@ const JobsView = (props) => {
                     </p>
                   </div>
                   <div className="tw-text-left tw-w-full">
-                    <Link
-                      href={`https://job.youth.com.vn/job/job-detail/${data[0]?.slug}/${data[0]?.id}`}
-                    >
+                    <Link href={`/Post?id=${data[0].id}`}>
                       <a className="tw-text-gray-800 tw-font-bold tw-leading-tight tw-text-[28px] tw-inline tw-mr-6 hover:tw-text-black">
                         {data[0]?.title}
                       </a>
                     </Link>
 
                     <p className="tw-text-[#92929D] tw-font-normal tw-text-xl tw-leading-[30px] tw-tracking-[0.1px] tw-inline ">
-                      {calculateDateDiff(data[0]?.updated_at)} ngày trước
+                      {calculateDateDiff(data[0]?.created_date)} ngày trước
                     </p>
                   </div>
                   <div className="tw-w-full">
@@ -208,7 +193,7 @@ const JobsView = (props) => {
                   location={job.address}
                   slug={job.slug}
                   title={job.title}
-                  updateAt={`${calculateDateDiff(job?.updated_at)} ngày trước`}
+                  updateAt={`${calculateDateDiff(job?.created_date)} ngày trước`}
                   workTime={job?.form_of_work}
                   salary={`${convertToSimplifiedVND(
                     job?.salary_min

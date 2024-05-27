@@ -50,7 +50,10 @@ const UploadCVModal = ({ onClose }) => {
   const getDataAssessment = useSelector((state: any) => state.dataAssessment.data);
   const [listImgEdit, setListImgEdit] = useState<string[]>([]);
   const [educationList, setEducationList] = useState([{}]);
-  const [path_CV, setPathCV] = useState("");
+  const [path_CV, setPathCV] = useState('');
+  const [uploadCVModal, setUploadCVModal] = useState(false);
+  const closeUploadCVModal = () => setUploadCVModal(false);
+  const openUploadCVModal = () => setUploadCVModal(true);
 
   const handleAddEducation = () => {
     setEducationList([...educationList, {}]); // Thêm một phần học vấn mới vào danh sách
@@ -71,13 +74,13 @@ const UploadCVModal = ({ onClose }) => {
       // Tạo formData để chứa tệp cần upload
       const formData = new FormData();
       formData.append('file', file);
-  
+
       // Gọi hàm createUploadFile với formData chứa tệp cần upload
       const uploadResult = await upLoadCVServiceService.createUploadFile(formData);
-      setPathCV(uploadResult.filename)
+      setPathCV(uploadResult.filename);
       // Xử lý kết quả từ việc upload file
       console.log('Upload result:', uploadResult.filename);
-      
+
       // Cập nhật trạng thái hoặc thực hiện hành động phù hợp với kết quả
     } catch (error) {
       // Xử lý lỗi nếu có
@@ -132,7 +135,7 @@ const UploadCVModal = ({ onClose }) => {
           formData[LICENSE_DATA_FIELD.cv_path] = filePath.toString();
         }
       }
-      
+
       const startDay = moment(formData[CV_EDU_DATA_FIELD.start_day]);
       console.log('Ngày bắt đầu: ', startDay);
       const endDay = moment(formData[CV_EDU_DATA_FIELD.end_day]);
@@ -151,7 +154,7 @@ const UploadCVModal = ({ onClose }) => {
         created_by: 'string',
         updated_by: 'string',
         assessment_id: getDataAssessment,
-        assessment_result_id:0,
+        assessment_result_id: 0,
         cv_Update_Cvs: {
           user_id: '6bf6efef2f074cc59c4510a5763c9662',
           note: 'string',
@@ -193,7 +196,6 @@ const UploadCVModal = ({ onClose }) => {
       console.error('Error while uploading CV:', error);
       message.error('Có lỗi xảy ra khi upload CV');
     }
-
   };
 
   return (
@@ -217,12 +219,7 @@ const UploadCVModal = ({ onClose }) => {
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
+            <path></path>
           </svg>
         </button>
 
@@ -708,11 +705,11 @@ const UploadCVModal = ({ onClose }) => {
                 className="h-full bg-[#F1F1F5] !rounded-[10px] !border-[3px] !border-dashed border-[#D5D5DC] !overflow-hidden"
                 maxCount={1}
                 onChange={(info) => {
-                    const file = info.file.originFileObj; // Lấy tệp từ sự kiện thay đổi
-                if (file) {
-                  handleFileChange(file); // Gọi hàm xử lý khi có tệp được chọn
+                  const file = info.file.originFileObj; // Lấy tệp từ sự kiện thay đổi
+                  if (file) {
+                    handleFileChange(file); // Gọi hàm xử lý khi có tệp được chọn
+                  }
                 }}
-              }
                 // showUploadList={false}
                 fileList={avatarFile?.fileList}
               >

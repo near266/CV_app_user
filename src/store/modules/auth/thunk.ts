@@ -23,7 +23,7 @@ export function asyncProcessAuth(): any {
 
 export function asyncLogoutAuth(): any {
   return (dispatch) => {
-    authService.logout();
+    localStorage.removeItem('jwtToken');
     setTimeout(() => {
       window.location.href = '/';
     }, 600);

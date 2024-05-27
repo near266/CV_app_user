@@ -116,9 +116,7 @@ const List = (props) => {
                       onClick={() =>
                         onClickTryTest(`${item.slug}${item.isEvent ? '?event=true' : ''}`)
                       }
-                    >
-                      Test ngay
-                    </div>
+                    ></div>
                   </div>
                 </div>
               </div>

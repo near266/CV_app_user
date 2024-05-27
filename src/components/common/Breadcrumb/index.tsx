@@ -15,8 +15,8 @@ const mapPathToLabel = (path: string) => {
     case '':
       return 'Trang chủ';
     case 'danh-gia-nang-luc':
-      return 'Đánh giá';
-  
+      return 'Tạo Cv';
+
     case 'events':
       return 'Sự kiện';
     case 'for-you':

@@ -32,7 +32,7 @@ const Introduction = (props) => {
             </div>
             {/* <p className={styles.description}></p> */}
             <div className={`${styles.links} tw-flex tw-mt-6  tw-pb-4`}>
-              <Button
+              {/* <Button
                 className="tw-normal-case !tw-bg-[#403ECC] tw-not-italic tw-font-bold
                 tw-tracking-[0.1px] tw-text-xl
                 tw-leading-6 tw-text-center tw-text-white md:tw-px-8 !tw-rounded-[10px] md:tw-py-[16px] tw-py-[10px] tw-px-[42.5px]"
@@ -42,7 +42,7 @@ const Introduction = (props) => {
                 }}
               >
                 Test ngay
-              </Button>
+              </Button> */}
             </div>
             <div className={styles.createPost}></div>
           </div>
